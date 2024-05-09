@@ -142,6 +142,42 @@
   width: calc(100% - 65px);
 }
 
+.home-content {
+  position: relative;
+  background: #32f5f5;
+  min-height: 90vh;
+  width: calc(100% - 240px);
+  left: 240px;
+  transition: all 0.5s ease;
+}
+
+.home-content .subnav {
+  display: flex;
+  justify-content: space-between;
+  height:10vh;
+  max-height: 10vh;
+  background: #f6cf0d;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: calc(100% - 240px);
+  left: 240px;
+  z-index: 100;
+  padding: 0 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+}
+
+.sidebar.active ~ .home-content{
+  left: 65px;
+  width: calc(100% - 65px);
+}
+
+.sidebar.active ~ .home-content .subnav{
+  left: 65px;
+  width: calc(100% - 65px);
+}
+
 .home-section nav .sidebar-button {
   display: flex;
   align-items: center;
@@ -220,84 +256,9 @@ nav .profile-details i {
   color: #333;
 }
 
-@media (max-width: 1240px) {
-  .sidebar {
-    width: 60px;
-  }
+@media (max-width: 1024px) {
+  
 
-  .sidebar.active {
-    width: 220px;
-  }
-
-  .home-section {
-    width: calc(100% - 60px);
-    left: 60px;
-  }
-
-  .sidebar.active ~ .home-section {
-    left: 220px;
-    width: calc(100% - 220px);
-    overflow: hidden;
-  }
-
-  .home-section nav {
-    width: calc(100% - 60px);
-    left: 60px;
-  }
-
-  .sidebar.active ~ .home-section nav {
-    width: calc(100% - 220px);
-    left: 220px;
-  }
+ 
 }
 
-@media (max-width: 1150px) {
-  .home-content .sales-boxes {
-    flex-direction: column;
-  }
-
-  .home-content .sales-boxes .box {
-    width: 100%;
-    overflow-x: scroll;
-    margin-bottom: 30px;
-  }
-
-  .home-content .sales-boxes .top-sales {
-    margin: 0;
-  }
-}
-
-@media (max-width: 1000px) {
-  .overview-boxes .box {
-    width: calc(100% / 2 - 15px);
-    margin-bottom: 15px;
-  }
-}
-
-@media (max-width: 700px) {
-  nav .sidebar-button .dashboard,
-  nav .profile-details .admin_name,
-  nav .profile-details i {
-    display: none;
-  }
-
-  .home-section nav .profile-details {
-    height: 50px;
-    min-width: 40px;
-  }
-
-  .home-content .sales-boxes .sales-details {
-    width: 560px;
-  }
-}
-
-@media (max-width: 550px) {
-  .overview-boxes .box {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-
-  .sidebar.active ~ .home-section nav .profile-details {
-    display: none;
-  }
-}
