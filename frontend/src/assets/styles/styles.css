@@ -60,25 +60,45 @@
 }
 
 .sidebar .nav-links li a.active {
-  background: #081D45;
+  background: #ffffff;
+  color:#081D45;
 }
 
 .sidebar .nav-links li a:hover {
-  background: #081D45;
+  background: #ffffff;
+  color:#081D45;
+}
+
+.sidebar .nav-links li a:hover i,
+.sidebar .nav-links li a:hover .links_name {
+  color: #081D45;
+}
+
+.sidebar .nav-links li a.active i,
+.sidebar .nav-links li a.active .links_name {
+  color: #081D45;
 }
 
 .sidebar .nav-links li i {
-  min-width: 60px;
+  min-width: 65px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   color: #fff;
 }
 
 .sidebar .nav-links li a .links_name {
   color: #fff;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: bolder;
   white-space: nowrap;
+}
+
+.sidebar .nav-links li a .links_name:hover {
+  color:#081D45 ;
+}
+
+.sidebar .nav-links li a .links_name:active {
+  color:#081D45 ;
 }
 
 .sidebar .nav-links .log_out {
