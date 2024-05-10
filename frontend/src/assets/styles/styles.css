@@ -288,6 +288,10 @@ nav .profile-details i {
   .sidebar:not(.active) ~.home-section nav{
     display: none;
   }
+
+  .sidebar.btn{
+    height:10vh;
+  }
 }
 
 
