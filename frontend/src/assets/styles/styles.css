@@ -8,6 +8,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* Side-bar */
 .sidebar {
   position: fixed;
   height: 100%;
@@ -101,12 +102,7 @@
   color:#081D45 ;
 }
 
-.sidebar .nav-links .log_out {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
+/* Home-content and Home-Section */
 .home-section {
   position: relative;
   background: #f5f5f5;
@@ -176,6 +172,16 @@
 .sidebar.active ~ .home-content .subnav{
   left: 65px;
   width: calc(100% - 65px);
+}
+
+.sidebar .btn{
+  position: absolute;
+  bottom:0;
+  width:100%;
+  justify-content: center;
+}
+.sidebar.active .btn{
+  display:none;
 }
 
 .home-section nav .sidebar-button {
@@ -256,9 +262,33 @@ nav .profile-details i {
   color: #333;
 }
 
-@media (max-width: 1024px) {
-  
+/* Media query for tablets */
+@media (max-width: 768px) {
+  .sidebar:not(.active) ~ .home-section nav .profile-details,
+  .sidebar:not(.active) ~ .home-content .subnav {
+    display: none;
+  }
 
- 
+  .sidebar.active ~ .home-section nav .profile-details,
+  .sidebar.active ~ .home-content .subnav {
+    display: flex; /* or 'block', depending on your layout */
+  }
 }
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+  }
+  .sidebar.active {
+    width: 60px;
+  }
+  .sidebar:not(.active) ~.home-section ,
+  .sidebar:not(.active) ~.home-content,
+  .sidebar:not(.active) ~.home-section nav{
+    display: none;
+  }
+}
+
+
 
