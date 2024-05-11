@@ -13,7 +13,9 @@
   position: fixed;
   height: 100%;
   width: 240px;
-  background: #0A2558;
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */  
+  background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   transition: all 0.5s ease;
 }
 
@@ -61,12 +63,12 @@
 }
 
 .sidebar .nav-links li a.active {
-  background: #ffffff;
+  background:#e9f2ff;
   color:#081D45;
 }
 
 .sidebar .nav-links li a:hover {
-  background: #ffffff;
+  background:#e9f2ff;
   color:#081D45;
 }
 
@@ -140,30 +142,68 @@
 
 .home-content {
   position: relative;
-  background: #32f5f5;
+  background:white;
   min-height: 90vh;
   width: calc(100% - 240px);
   left: 240px;
   transition: all 0.5s ease;
 }
 
-.home-content .subnav {
+.home-content .subnav{
   display: flex;
   justify-content: space-between;
   height:10vh;
-  max-height: 10vh;
-  background: #f6cf0d;
+  background:#ffffff;
   display: flex;
   align-items: center;
   position: fixed;
   width: calc(100% - 240px);
   left: 240px;
   z-index: 100;
-  padding: 0 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
 }
 
+.home-content .subnav ul{
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 18px;
+}
+
+.home-content .subnav ul li{
+  flex-grow: 1;
+  background:fff;
+  padding:18px;
+  text-align: center;
+}
+
+.home-content .subnav ul li:hover{
+  background:#e9f2ff
+}
+
+.home-content .subnav ul li:hover a{
+  color:#007bff;
+}
+
+.home-content .subnav ul li.current{
+  background:#e9f2ff;
+}
+
+.home-content .subnav ul li.current a{
+  color:#007bff;
+}
+
+
+
+.home-content .subnav ul a{
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  font-weight: bolder;
+}
 .sidebar.active ~ .home-content{
   left: 65px;
   width: calc(100% - 65px);
@@ -185,7 +225,11 @@
 .sidebar.active .btn{
   display:none;
 }
-
+.home-section nav{
+  background: #5f2c82;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #49a09d, #5f2c82);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #49a09d, #5f2c82); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .home-section nav .sidebar-button {
   display: flex;
   align-items: center;
@@ -259,7 +303,7 @@ nav .profile-details img {
     display: none;
   }
 
-  .sidebar.active ~ .home-section nav .profile-details,
+  .sidebar.active ~ .home-section nav ,
   .sidebar.active ~ .home-content .subnav {
     display: flex; /* or 'block', depending on your layout */
   }
