@@ -203,6 +203,7 @@
   color: #000;
   font-size: 16px;
   font-weight: bolder;
+  padding:18px;
 }
 .sidebar.active ~ .home-content{
   left: 65px;
