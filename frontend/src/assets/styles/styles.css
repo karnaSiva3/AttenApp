@@ -122,7 +122,7 @@
 .home-section nav {
   display: flex;
   justify-content: space-between;
-  max-height: 90vh;
+  min-height: 10vh;
   background: #fff;
   display: flex;
   align-items: center;
