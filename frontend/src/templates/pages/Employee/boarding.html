@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>ATTENAPP|Dashboard</title>
     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
+    <link rel="stylesheet" href="../../../assets/styles/form.css" />
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <!-- Remixicon CDN Link -->
@@ -101,6 +102,7 @@
       </nav>
     </section>
 
+
      <!-- sub nav bar -->
      <section class="home-content">
        <div class="subnav">
@@ -111,6 +113,58 @@
           <li><a href="attendence.html">Time/Attendence</a></li>
         </ul>
       </div>
+      <div class="container">
+         <div class="title">Onboarding Form</div>
+          <div class="content">
+             <form action="#" id="onboardingForm">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Name</span>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Job Title</span>
+                        <input type="text" id="jobTitle" name="jobTitle" placeholder="Enter your job title" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Department</span>
+                        <input type="text" id="department" name="department" placeholder="Enter your department" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone</span>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Photo</span>
+                        <input type="file" id="photo" name="photo" accept="image/*" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Government ID Number</span>
+                        <input type="text" id="govtIdNumber" name="govtIdNumber" placeholder="Enter your government ID number" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">PAN Card Number</span>
+                        <input type="text" id="panCardNumber" name="panCardNumber" placeholder="Enter your PAN card number" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Residential Address</span>
+                        <textarea id="residentialAddress" name="residentialAddress" placeholder="Enter your residential address" required></textarea>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Permanent Address</span>
+                        <textarea id="permanentAddress" name="permanentAddress" placeholder="Enter your permanent address" required></textarea>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+         </div>
+        </div>
      </section>
 
      
@@ -120,5 +174,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
+    <script src="../../../scripts/components/directoryForm.js"></script>
   </body>
 </html>
