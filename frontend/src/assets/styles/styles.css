@@ -25,6 +25,7 @@
 
 .sidebar.active {
   width: 60px;
+  justify-content: start;
 }
 
 .sidebar .logo-details {
@@ -113,6 +114,7 @@
   position: relative;
   background: #f5f5f5;
   min-height: 10vh;
+  padding-bottom:1rem;
   width: calc(100% - 240px);
   left: 240px;
   transition: all 0.5s ease;
@@ -144,28 +146,41 @@
 }
 
 .home-content {
+  display:flex;
+  flex-direction:row;
   position: relative;
   background: #f5f5f5;
-  min-height: 90vh;
+  max-height: 10vh;
+  margin-bottom:1rem;
   width: calc(100% - 240px);
   left: 240px;
   transition: all 0.5s ease;
 }
 
+.sidebar.active ~ .home-content {
+  width: calc(100% - 65px);
+  left: 65px;
+}
+
 .home-content .subnav{
   display: flex;
   justify-content: space-between;
-  max-height: 10vh;
+  min-height: 10vh;
   background: #fff;
   display: flex;
   align-items: center;
   position: fixed;
   width: calc(100% - 240px);
   left: 240px;
-  padding: 0 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease;
 }
+
+.sidebar.active ~ .home-content .subnav {
+  left: 65px;
+  width: calc(100% - 65px);
+}
+
 
 .home-content .subnav ul{
   display: flex;
@@ -173,13 +188,13 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  padding: 18px;
+  padding: 10px;
 }
 
 .home-content .subnav ul li{
   flex-grow: 1;
   background:fff;
-  padding:18px;
+  padding:10px;
   text-align: center;
 }
 
@@ -208,15 +223,7 @@
   font-weight: bolder;
   padding:18px;
 }
-.sidebar.active ~ .home-content{
-  left: 65px;
-  width: calc(100% - 65px);
-}
 
-.sidebar.active ~ .home-content .subnav{
-  left: 65px;
-  width: calc(100% - 65px);
-}
 
 .sidebar .btn{
   position:relative;
@@ -233,7 +240,6 @@
   background: -webkit-linear-gradient(to right, #49a09d, #5f2c82);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #49a09d, #5f2c82); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding-bottom:5px;
-  margin-top:3px;
 }
 .home-section nav .sidebar-button {
   display: flex;
@@ -300,6 +306,23 @@ nav .profile-details img {
   object-fit: cover;
 }
 
+.page-content {
+  display:flex;
+  flex-wrap: wrap;
+  position: relative;
+  background: #f7f8f9;
+  height:auto;
+  margin-top:75px;
+  width: calc(100% - 240px);
+  left: 240px;
+  transition: all 0.5s ease;
+  z-index:-999;
+}
+
+.sidebar.active ~ .page-content{
+  width: calc(100% - 65px);
+  left: 65px;
+}
 
 /* Media query for tablets */
 @media (max-width: 768px) {
