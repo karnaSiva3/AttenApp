@@ -150,11 +150,12 @@
   flex-direction:row;
   position: relative;
   background: #f5f5f5;
-  max-height: 10vh;
-  margin-bottom:1rem;
+  height:100vh;
+  background: yellow;
   width: calc(100% - 240px);
   left: 240px;
   transition: all 0.5s ease;
+  z-index:-999;
 }
 
 .sidebar.active ~ .home-content {
@@ -165,7 +166,7 @@
 .home-content .subnav{
   display: flex;
   justify-content: space-between;
-  min-height: 10vh;
+  max-height: 10vh;
   background: #fff;
   display: flex;
   align-items: center;
@@ -289,40 +290,22 @@ nav .search-box .bx-search {
 }
 
 .home-section nav .profile-details {
-  display: flex;
-  align-items: center;
-  background: #F5F6FA;
-  border: 2px solid #EFEEF1;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  padding: 0 0px 0 0px;
-}
-
-nav .profile-details img {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.page-content {
   display:flex;
-  flex-wrap: wrap;
-  position: relative;
-  background: #f7f8f9;
-  height:auto;
-  margin-top:75px;
-  width: calc(100% - 240px);
-  left: 240px;
-  transition: all 0.5s ease;
-  z-index:-999;
+  height:3rem;
+  width:3rem;
+  border-radius: 50%;
+  background:#ccc;
 }
 
-.sidebar.active ~ .page-content{
-  width: calc(100% - 65px);
-  left: 65px;
+.home-section nav .profile-details img {
+  display:flex;
+  height:3rem;
+  width:3rem;
+  border-radius: 50%;
+  background:#ccc;
 }
+
+
 
 /* Media query for tablets */
 @media (max-width: 768px) {
@@ -355,6 +338,7 @@ nav .profile-details img {
   .home-section nav .profile-details,
   nav .profile-details img {
     display:none;
+    
   }
   
 
