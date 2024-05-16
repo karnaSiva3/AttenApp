@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>ATTENAPP|Dashboard</title>
     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
+    <link rel="stylesheet" href="../../../assets/styles/form.css" />
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <!-- Remixicon CDN Link -->
@@ -101,20 +102,26 @@
       </nav>
     </section>
 
+
      <!-- sub nav bar -->
      <section class="home-content">
        <div class="subnav">
-        <ul>
-          <li><a href="directory.html">Directory</a></li>
-          <li "><a href="profiles.html">Profiles</a></li>
-          <li><a href="boarding.html">Onboarding/Offboarding</a></li>
-          <li class="current"><a href="#">Time/Attendence</a></li>
-        </ul>
-      </div>
+         <ul>
+           <li><a href="directory.html">Directory</a></li>
+           <li ><a href="profiles.html">Profiles</a></li>
+           <li class="current"><a href="#">Onboarding/Offboarding</a></li>
+           <li><a href="attendence.html">Time/Attendence</a></li>
+         </ul>
+       </div>
      </section>
+     
      <section class="page-content"> 
-       
+        <ul class="navbar">
+          <li ><a href="boarding.html">Onboarding</a></li>
+          <li class="current"><a href="#">Offboarding</a></li>
+        </ul>
      </section>
+
      
     <!-- bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -122,5 +129,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
+    <script src="../../../scripts/components/directoryForm.js"></script>
   </body>
 </html>
