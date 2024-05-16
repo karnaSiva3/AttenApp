@@ -1,0 +1,95 @@
+.page-content .navbar{
+    width:100%;
+    height:5rem;
+    background:white;
+    display:flex;
+    justify-content: space-evenly;
+    border-bottom:1px solid #ccc;
+  }
+  
+  .page-content ul li{
+   
+    font-size:1.2rem;
+    font-weight:bolder;
+    padding: 0.8rem 13rem 0.8rem 13rem;
+    text-align: center;
+  }
+  
+  .page-content ul li:hover{
+    background:#e9f2ff;
+    color:#007bff;
+  }
+  .page-content ul li.current{
+    background:#e9f2ff;
+    color:#007bff;
+  }
+  
+  .page-content ul li a{
+    text-decoration: none;
+  }
+  .page-content h1{
+    font-size:2rem;
+    font-weight: bolder;
+    text-align:center;
+    padding:1rem;
+    color:black;
+  }
+  .page-content form{
+    max-width: 1200px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    margin:auto;
+  }
+  
+  .page-content form .employee-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .page-content form .employee-details .form-group{
+    margin-bottom: 15px;
+    width: calc(50% - 10px)
+  }
+  .page-content form .employee-details .form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .page-content form .employee-details .form-group input,
+  .page-content form .employee-details .form-group textarea{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  .page-content form .employee-details .form-group textarea {
+    height: auto;
+    padding: 10px 15px;
+  }
+  
+  .page-content form .employee-details.form-group input:focus,
+  .page-content form .employee-details.form-group input:valid,
+  .page-content form .employee-details.form-group textarea:focus,
+  .page-content form .employee-details.form-group textarea:valid {
+      border-color: #007bff;
+  }
+  
+  .page-content form button{
+    width:100%;
+    text-align: center;
+    height:3rem;
+    background:#007bff;
+    font-weight:bolder;
+    color:white;
+  }
