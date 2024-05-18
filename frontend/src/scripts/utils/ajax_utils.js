@@ -8,13 +8,17 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
   xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 400) {
           console.log(this.response);
+          if(xhr.status == 200){
+            alert('Data submitted successfully');
+            document.querySelector('form').reset();
+          }
       } else {
-          console.error('Server reached, but it returned an error');
+          alert('Server reached, but it returned an error');
       }
   };
 
   xhr.onerror = function() {
-      console.error('Connection error');
+      alert('Connection error');
   };
 
   xhr.send(formData);
