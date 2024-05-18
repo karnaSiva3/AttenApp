@@ -1,20 +1,21 @@
-document.querySelector('form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var formData = new FormData(this);
+document.getElementById('submitBtn').addEventListener('click', function(event) {
+  event.preventDefault();
+
+  var formData = new FormData(document.querySelector('form'));
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:80/backend/public/onboarding.php', true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        var response = JSON.parse(xhr.responseText);
-        console.log(response.message);
-        
+  xhr.open('POST', 'http://localhost/backend/public/onboarding.php', true);
+
+  xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 400) {
+          console.log(this.response);
       } else {
-        console.error('Error:', xhr.statusText);
-        
-        alert('An error occurred while submitting the form. Please try again.');
+          console.error('Server reached, but it returned an error');
       }
-    }
   };
+
+  xhr.onerror = function() {
+      console.error('Connection error');
+  };
+
   xhr.send(formData);
 });
