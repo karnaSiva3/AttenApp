@@ -1,0 +1,1 @@
+const tableBody = document.querySelector('tbody');
