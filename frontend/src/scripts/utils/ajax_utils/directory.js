@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 let tableRows = [];
-const itemsPerPage = 10; // Number of rows per page
+const itemsPerPage = 5; 
 let currentPage = 1;
 
 function fetchTableData() {
@@ -102,27 +102,22 @@ const pageInfo = document.getElementById('pageInfo');
 function displayPage(page) {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  const visibleRows = tableRows.filter(row => row.style.display !== 'none');
+
   tableRows.forEach((row, index) => {
-      if (index >= startIndex && index < endIndex && row.style.display !== 'none') {
-          row.style.display = '';
-      } else {
-          row.style.display = 'none';
-      }
+    if (index >= startIndex && index < endIndex && visibleRows.includes(row)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
   });
+
   currentPage = page;
-  updatePaginationButtons();
+  updatePaginationButtons(visibleRows.length);
 }
 
-function updatePagination(totalItems) {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-  prevPageBtn.disabled = currentPage === 1;
-  nextPageBtn.disabled = currentPage === totalPages;
-}
-
-function updatePaginationButtons() {
-  const totalItems = tableRows.filter(row => row.style.display !== 'none').length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+function updatePaginationButtons(visibleRowsCount) {
+  const totalPages = Math.ceil(visibleRowsCount / itemsPerPage);
   pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
   prevPageBtn.disabled = currentPage === 1;
   nextPageBtn.disabled = currentPage === totalPages;
