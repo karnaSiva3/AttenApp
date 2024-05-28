@@ -3,7 +3,7 @@ document.getElementById('submitBtn').addEventListener('click', function(event) {
 
   var formData = new FormData(document.querySelector('form'));
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost/backend/public/onboarding.php', true);
+  xhr.open('POST', 'http://localhost/backend/ajax/onboarding.php', true);
 
   xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 400) {

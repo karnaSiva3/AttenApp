@@ -1,87 +1,55 @@
-  .page-content .wrapper {
-    margin-top: 5vh;
-  }
-  
-  .page-content .dataTables_filter {
-    float: right;
-  }
-  
-  .page-content .table-hover > tbody > tr:hover {
-      background-color: lighten(cyan, 40%);
-  }
-  
-  .page-content .table {
-    @media only screen and (min-width: 768px) {
-      table-layout: fixed;
-      max-width: 100% !important;
-    }
-  }
-  
-  .page-content thead {
-    background: #ddd;
-  }
-  
-  .page-content .table td:nth-child(2) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .page-content .highlight {
-    background: lighten(yellow,30%);
-  }
-  
-  @media only screen and (max-width: 767px) {
-    .page-content table,
-    .page-content thead,
-    .page-content tbody,
-    .page-content th,
-    .page-content td,
-    .page-content tr {
-      display: block;
-    }
-  
-    .page-content thead tr,
-    .page-content tfoot tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  
-    .page-content td {
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 50% !important;
-    }
-  
-    .page-content td:before {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-    }
-  
-    .page-content .table td:nth-child(1) {
-        background: #ccc;
-        height: 100%;
-        top: 0;
-        left: 0;
-        font-weight: bold;
-    }
-  
-    .page-content td:nth-of-type(1):before { content: "EID"; }
-    .page-content td:nth-of-type(1):before { content: "Name"; }
-    .page-content td:nth-of-type(2):before { content: "Position"; }
-    .page-content td:nth-of-type(2):before { content: "Department"; }
-    .page-content td:nth-of-type(3):before { content: "Office Location"; }
-    .page-content td:nth-of-type(4):before { content: "Status"; }
-    .page-content td:nth-of-type(5):before { content: "Phone"; }
-    .page-content td:nth-of-type(6):before { content: "Email"; }
-  
-    .page-content .dataTables_length {
-      display: none;
-    }
-  }
-  
+/* Table Styles */
+.page-content #directoryTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.page-content #directoryTable th,
+.page-content #directoryTable td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.page-content #directoryTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.page-content #directoryTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.page-content #directoryTable tr:hover {
+  background-color: #e6e6e6;
+}
+
+/* Pagination Styles */
+.page-content #pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.page-content #pagination button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-content #pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-content #pagination button:hover:enabled {
+  background-color: #45a049;
+}
+
+.page-content #pageInfo {
+  margin: 0 10px;
+  font-weight: bold;
+}
