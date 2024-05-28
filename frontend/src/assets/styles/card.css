@@ -1,0 +1,40 @@
+/* Googlefont Poppins CDN Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.page-content{
+    background:#dfe1e1;
+}
+
+.page-content .card{
+  
+    display:flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items: center;
+    box-shadow: 2rem #86bffc;
+    height:10rem;
+    width:auto;
+    margin:20px;
+    padding:5px;
+    border-radius:10px;
+}
+
+.page-content text{
+    font-weight:bolder;
+    font-size: large;
+
+}
+.page-content button{
+   height:4rem;
+   width:12rem;
+   padding:0.5rem;
+   margin:auto;
+   font-weight: bolder;
+   background:#0735c0;
+   color:white;
+   border-radius:1rem;
+}
+
+.page-content button:hover{
+    background:#069a32;
+ }

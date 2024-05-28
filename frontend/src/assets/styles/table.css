@@ -3,6 +3,7 @@
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
+  font-weight: 500;
 }
 
 .page-content #directoryTable th,
@@ -13,7 +14,7 @@
 }
 
 .page-content #directoryTable th {
-  background-color: #f2f2f2;
+  background-color: #e9f2ff;
   font-weight: bold;
 }
 
@@ -22,7 +23,9 @@
 }
 
 .page-content #directoryTable tr:hover {
-  background-color: #e6e6e6;
+  background:#e9f2ff;
+  color:#007bff;
+  font-weight: 600;
 }
 
 /* Pagination Styles */

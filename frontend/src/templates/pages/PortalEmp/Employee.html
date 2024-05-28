@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>ATTENAPP|Employee</title>
     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
+    <link rel="stylesheet" href="../../../assets/styles/card.css">
     <!-- jquery cdn link -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <!-- Boxicons CDN Link -->
@@ -68,9 +69,12 @@
       </div>
      </section>
 
-      <section class="page-content"> 
-       
-      </section>
+  <section class="page-content">
+     <div class="card">
+          <text id="total-hours">Total working hours Today: 00:00:00</text>
+          <button id="clock-in">CLOCK-IN</button>
+     </div>
+ </section>
     <!-- bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- jquery -->
@@ -78,7 +82,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
-    <script src="../../../scripts/components/table.js"></script>
-    <script src="../../../scripts/utils/ajax_utils/directory.js"></script>
+    <script src="../../../scripts/components/clock_in.js">
+    </script>
   </body>
 </html>
