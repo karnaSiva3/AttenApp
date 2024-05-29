@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', function() {
   fetchTableData();
-});
+});  
 
 let tableRows = [];
 const itemsPerPage = 5; 
@@ -29,41 +29,59 @@ function populateTable(data) {
   tableBody.innerHTML = '';
   tableRows = [];
   data.forEach(function(row) {
-      const newRow = document.createElement('tr');
-      const eidCell = document.createElement('td');
-      eidCell.textContent = row.eid;
-      newRow.appendChild(eidCell);
+    const newRow = document.createElement('tr');
+    const eidCell = document.createElement('td');
+    eidCell.textContent = row.eid;
+    newRow.appendChild(eidCell);
 
-      const nameCell = document.createElement('td');
-      nameCell.textContent = row.Name;
-      newRow.appendChild(nameCell);
+    const nameCell = document.createElement('td');
+    nameCell.textContent = row.Name;
+    newRow.appendChild(nameCell);
 
-      const positionCell = document.createElement('td');
-      positionCell.textContent = row.position;
-      newRow.appendChild(positionCell);
+    const positionCell = document.createElement('td');
+    positionCell.textContent = row.position;
+    newRow.appendChild(positionCell);
 
-      const departmentCell = document.createElement('td');
-      departmentCell.textContent = row.Department;
-      newRow.appendChild(departmentCell);
+    const departmentCell = document.createElement('td');
+    departmentCell.textContent = row.Department;
+    newRow.appendChild(departmentCell);
 
-      const officeLocationCell = document.createElement('td');
-      officeLocationCell.textContent = row.office_location;
-      newRow.appendChild(officeLocationCell);
+    const officeLocationCell = document.createElement('td');
+    officeLocationCell.textContent = row.office_location;
+    newRow.appendChild(officeLocationCell);
 
-      const statusCell = document.createElement('td');
-      statusCell.textContent = row.status;
-      newRow.appendChild(statusCell);
+    const statusCell = document.createElement('td');
+    const statusContainer = document.createElement('div');
+    statusContainer.textContent = row.status;
+    statusContainer.classList.add('status-container');
 
-      const phoneCell = document.createElement('td');
-      phoneCell.textContent = row.Phone;
-      newRow.appendChild(phoneCell);
+    switch (row.status) {
+      case 'On-Leave':
+        statusContainer.classList.add('red');
+        break;
+      case 'Work-from-home':
+        statusContainer.classList.add('yellow');
+        break;
+      case 'In-Office':
+        statusContainer.classList.add('green');
+        break;
+      default:
+        break;
+    }
 
-      const emailCell = document.createElement('td');
-      emailCell.textContent = row.Email;
-      newRow.appendChild(emailCell);
+    statusCell.appendChild(statusContainer);
+    newRow.appendChild(statusCell);
 
-      tableBody.appendChild(newRow);
-      tableRows.push(newRow);
+    const phoneCell = document.createElement('td');
+    phoneCell.textContent = row.Phone;
+    newRow.appendChild(phoneCell);
+
+    const emailCell = document.createElement('td');
+    emailCell.textContent = row.Email;
+    newRow.appendChild(emailCell);
+
+    tableBody.appendChild(newRow);
+    tableRows.push(newRow);
   });
   displayPage(1);
 }
@@ -104,6 +122,13 @@ function displayPage(page) {
   const endIndex = startIndex + itemsPerPage;
   const visibleRows = tableRows.filter(row => row.style.display !== 'none');
 
+  if (visibleRows.length === 0) {
+    tableRows.forEach(row => row.style.display = 'none');
+    currentPage = 1;
+    updatePaginationButtons(0);
+    return;
+  }
+
   tableRows.forEach((row, index) => {
     if (index >= startIndex && index < endIndex && visibleRows.includes(row)) {
       row.style.display = '';
@@ -114,15 +139,40 @@ function displayPage(page) {
 
   currentPage = page;
   updatePaginationButtons(visibleRows.length);
-}
 
-function updatePaginationButtons(visibleRowsCount) {
-  const totalPages = Math.ceil(visibleRowsCount / itemsPerPage);
-  pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+}
+function updatePagination(totalRows) {
+  const totalPages = Math.ceil(totalRows / itemsPerPage);
+  const visiblePages = Math.min(totalPages, 5); // Adjust this value as needed
+
+  // Update existing pagination elements
+  const prevPageBtn = document.getElementById('prevPage');
+  const nextPageBtn = document.getElementById('nextPage');
+  const pageInfo = document.getElementById('pageInfo');
+
   prevPageBtn.disabled = currentPage === 1;
   nextPageBtn.disabled = currentPage === totalPages;
-}
+  pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
 
+  // Clear existing page buttons
+  const pagination = document.getElementById('pagination');
+  const pageButtons = pagination.querySelectorAll('.page-button');
+  pageButtons.forEach(button => button.remove());
+
+  // Create page buttons
+  for (let i = 1; i <= visiblePages; i++) {
+    const pageButton = document.createElement('button');
+    pageButton.textContent = i;
+    pageButton.classList.add('page-button');
+    if (i === currentPage) {
+      pageButton.classList.add('active');
+    }
+    pageButton.addEventListener('click', () => {
+      displayPage(i);
+    });
+    pagination.insertBefore(pageButton, nextPageBtn);
+  }
+}
 prevPageBtn.addEventListener('click', () => {
   displayPage(currentPage - 1);
 });

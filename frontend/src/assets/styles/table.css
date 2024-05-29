@@ -28,6 +28,33 @@
   font-weight: 600;
 }
 
+.page-content .status-container {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-content .red {
+  background-color: #f10606;
+  color: white;
+}
+
+.page-content .yellow {
+  background-color: #ffc107;
+  color: black;
+}
+
+.page-content .green {
+  background-color: #21cf27;
+  color: white;
+}
+
 /* Pagination Styles */
 .page-content #pagination {
   margin-top: 20px;
