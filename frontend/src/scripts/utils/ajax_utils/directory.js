@@ -1,25 +1,27 @@
 window.addEventListener('DOMContentLoaded', function() {
   fetchTableData();
-});  
+});
 
 let tableRows = [];
-const itemsPerPage = 5; 
+const itemsPerPage = 10;
 let currentPage = 1;
+let totalRows = 0;
 
 function fetchTableData() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://localhost/backend/ajax/directory.php', true);
   xhr.onload = function() {
-      if (xhr.status === 200) {
-          var data = JSON.parse(xhr.responseText);
-          populateTable(data);
-          updatePagination(data.length);
-      } else {
-          console.error('Request failed. Status code:', xhr.status);
-      }
+    if (xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      totalRows = data.length;
+      populateTable(data);
+      updatePagination(totalRows);
+    } else {
+      console.error('Request failed. Status code:', xhr.status);
+    }
   };
   xhr.onerror = function() {
-      console.error('Connection error');
+    console.error('Connection error');
   };
   xhr.send();
 }
@@ -59,7 +61,7 @@ function populateTable(data) {
       case 'On-Leave':
         statusContainer.classList.add('red');
         break;
-      case 'Work-from-home':
+      case 'WFH':
         statusContainer.classList.add('yellow');
         break;
       case 'In-Office':
@@ -92,30 +94,28 @@ searchInput.addEventListener('input', filterTable);
 
 function filterTable() {
   const searchValue = searchInput.value.toLowerCase();
-  tableRows.forEach(row => {
-      const cells = row.getElementsByTagName('td');
-      let shouldHideRow = true;
-      for (let i = 0; i < cells.length; i++) {
-          const cellValue = cells[i].textContent.toLowerCase();
-          if (cellValue.includes(searchValue)) {
-              shouldHideRow = false;
-              break;
-          }
+  const filteredRows = tableRows.filter(row => {
+    const cells = row.getElementsByTagName('td');
+    for (let i = 0; i < cells.length; i++) {
+      const cellValue = cells[i].textContent.toLowerCase();
+      if (cellValue.includes(searchValue)) {
+        return true;
       }
-      if (shouldHideRow) {
-          row.style.display = 'none';
-      } else {
-          row.style.display = '';
-      }
+    }
+    return false;
   });
-  updatePagination(tableRows.filter(row => row.style.display !== 'none').length);
+
+  tableRows.forEach(row => row.style.display = 'none');
+  filteredRows.forEach(row => row.style.display = '');
+
+  updatePagination(filteredRows.length);
   displayPage(1);
 }
 
 // Pagination functionality
 const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
-const pageInfo = document.getElementById('pageInfo');
+const currentPageSpan = document.getElementById('currentPage');
 
 function displayPage(page) {
   const startIndex = (page - 1) * itemsPerPage;
@@ -123,14 +123,13 @@ function displayPage(page) {
   const visibleRows = tableRows.filter(row => row.style.display !== 'none');
 
   if (visibleRows.length === 0) {
-    tableRows.forEach(row => row.style.display = 'none');
     currentPage = 1;
     updatePaginationButtons(0);
     return;
   }
 
-  tableRows.forEach((row, index) => {
-    if (index >= startIndex && index < endIndex && visibleRows.includes(row)) {
+  visibleRows.forEach((row, index) => {
+    if (index >= startIndex && index < endIndex) {
       row.style.display = '';
     } else {
       row.style.display = 'none';
@@ -139,40 +138,21 @@ function displayPage(page) {
 
   currentPage = page;
   updatePaginationButtons(visibleRows.length);
-
 }
-function updatePagination(totalRows) {
+
+function updatePagination(rows) {
+  totalRows = rows;
   const totalPages = Math.ceil(totalRows / itemsPerPage);
-  const visiblePages = Math.min(totalPages, 5); // Adjust this value as needed
 
-  // Update existing pagination elements
-  const prevPageBtn = document.getElementById('prevPage');
-  const nextPageBtn = document.getElementById('nextPage');
-  const pageInfo = document.getElementById('pageInfo');
+  updatePaginationButtons(totalPages);
+}
 
+function updatePaginationButtons(totalPages) {
   prevPageBtn.disabled = currentPage === 1;
   nextPageBtn.disabled = currentPage === totalPages;
-  pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-
-  // Clear existing page buttons
-  const pagination = document.getElementById('pagination');
-  const pageButtons = pagination.querySelectorAll('.page-button');
-  pageButtons.forEach(button => button.remove());
-
-  // Create page buttons
-  for (let i = 1; i <= visiblePages; i++) {
-    const pageButton = document.createElement('button');
-    pageButton.textContent = i;
-    pageButton.classList.add('page-button');
-    if (i === currentPage) {
-      pageButton.classList.add('active');
-    }
-    pageButton.addEventListener('click', () => {
-      displayPage(i);
-    });
-    pagination.insertBefore(pageButton, nextPageBtn);
-  }
+  currentPageSpan.textContent = `${currentPage} of ${totalPages}`;
 }
+
 prevPageBtn.addEventListener('click', () => {
   displayPage(currentPage - 1);
 });
