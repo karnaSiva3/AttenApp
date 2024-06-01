@@ -1,5 +1,7 @@
-const clockInBtn = document.getElementById('clock-in');
-const totalHoursText = document.getElementById('total-hours');
+// Declare clockInBtn as a global variable
+let clockInBtn;
+let currentTimeValue;
+const totalHoursText = document.querySelector('.total-hours');
 let isClocked = false;
 let startTime;
 let elapsedTime = 0;
@@ -13,6 +15,7 @@ function formatTime(time) {
 
 function updateTimerDisplay() {
   const currentTime = isClocked ? Date.now() - startTime + elapsedTime : elapsedTime;
+  currentTimeValue = currentTime;
   totalHoursText.textContent = `Total working hours Today: ${formatTime(currentTime)}`;
 }
 
@@ -30,5 +33,14 @@ function toggleClock() {
   }
 }
 
-clockInBtn.addEventListener('click', toggleClock);
-setInterval(updateTimerDisplay, 1000);
+// Wait for the DOM to be loaded before accessing the clockInBtn element
+window.addEventListener('DOMContentLoaded', function() {
+  // Get the clockInBtn element from the DOM
+  clockInBtn = document.querySelector('.clock-in');
+
+  // Add event listener to clockInBtn
+  clockInBtn.addEventListener('click', toggleClock);
+
+  // Start the timer display update
+  setInterval(updateTimerDisplay, 1000);
+});

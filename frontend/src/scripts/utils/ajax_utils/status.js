@@ -1,29 +1,68 @@
-const clockInBtn = document.getElementById('clock-in');
+window.addEventListener('DOMContentLoaded', function() {
+  // Get the clockInBtn element from the DOM
+  const clockInBtn = document.getElementById('clock-in');
 
-clockInBtn.addEventListener('click', function() {
-  const eid = 18;
-  const newStatus = 'In-Office';
+  // Variable to store the initial clockInTime
+  let initialClockInTime = null;
 
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost/backend/ajax/status.php', true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  // Variable to store the initial clockInDate
+  let initialClockInDate = null;
 
-  xhr.onload = function() {
-    if (xhr.status >= 200 && xhr.status < 400) {
-      console.log(this.response);
-      if (xhr.status === 200) {
-        alert('Status updated successfully');
-    
-    }
+  // Add event listener to clockInBtn
+  clockInBtn.addEventListener('click', function() {
+    const eid = 11;
+    let newStatus;
+    let clockInTime;
+    let clockOutTime;
+
+    // Check the current text of the button to determine the new status and clock times
+    if (clockInBtn.textContent === 'CLOCK-OUT') {
+      newStatus = 'In-Office';
+      // Get the current timestamp and date when the button is clicked for the first time
+      if (!initialClockInTime) {
+        const currentDateTime = new Date();
+        initialClockInTime = currentDateTime.getTime();
+        initialClockInDate = currentDateTime.toISOString().slice(0, 10); // YYYY-MM-DD format
+      }
+      clockInTime = initialClockInDate + ' ' + new Date(initialClockInTime).toLocaleTimeString();
+      clockOutTime = '00:00:00';
     } else {
-      alert('Server reached, but it returned an error');
+      newStatus = 'On-Leave';
+      clockOutTime = new Date().toLocaleTimeString();
     }
-  };
 
-  xhr.onerror = function() {
-    alert('Connection error');
-  };
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost/backend/ajax/status.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        console.log(this.response);
+        if (xhr.status === 200) {
+          alert('Status updated successfully');
+        } else if (xhr.status === 204) {
+          alert('Data not present in the database');
+        }
+      } else {
+        alert('Server reached, but it returned an error');
+      }
+    };
+    xhr.onerror = function() {
+      alert('Connection error');
+    };
 
-  const data = `eid=${eid}&newStatus=${newStatus}`;
-  xhr.send(data);
+    // Get the currentTimeValue from the clock_in.js file and format it as HH:MM:SS
+    const currentTimeValueFormatted = formatTime(currentTimeValue);
+
+    const data = `eid=${eid}&newStatus=${newStatus}&clockInTime=${clockInTime}&clockOutTime=${clockOutTime}&currentTimeValue=${currentTimeValueFormatted}`;
+    xhr.send(data);
+    console.log(data);
+  });
 });
+
+// Function to format time in HH:MM:SS format
+function formatTime(time) {
+  const hours = Math.floor(time / 3600000).toString().padStart(2, '0');
+  const minutes = Math.floor((time % 3600000) / 60000).toString().padStart(2, '0');
+  const seconds = Math.floor((time % 60000) / 1000).toString().padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
+}
