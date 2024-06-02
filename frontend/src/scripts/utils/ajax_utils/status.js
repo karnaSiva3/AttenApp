@@ -5,12 +5,12 @@ window.addEventListener('DOMContentLoaded', function() {
   // Variable to store the initial clockInTime
   let initialClockInTime = null;
 
-  // Variable to store the initial clockInDate
-  let initialClockInDate = null;
+  // Get today's date in the desired format (YYYY-MM-DD)
+  const today = new Date().toISOString().slice(0, 10);
 
   // Add event listener to clockInBtn
   clockInBtn.addEventListener('click', function() {
-    const eid = 11;
+    const eid =27;
     let newStatus;
     let clockInTime;
     let clockOutTime;
@@ -24,11 +24,11 @@ window.addEventListener('DOMContentLoaded', function() {
         initialClockInTime = currentDateTime.getTime();
         initialClockInDate = currentDateTime.toISOString().slice(0, 10); // YYYY-MM-DD format
       }
-      clockInTime = initialClockInDate + ' ' + new Date(initialClockInTime).toLocaleTimeString();
-      clockOutTime = '00:00:00';
+      clockInTime = `${initialClockInDate} ${new Date(initialClockInTime).toLocaleTimeString('en-US', { hour12: false })}`;
+      clockOutTime = `${today} ${new Date().toLocaleTimeString('en-US', { hour12: false })}`;
     } else {
       newStatus = 'On-Leave';
-      clockOutTime = new Date().toLocaleTimeString();
+      clockOutTime = `${today} ${new Date().toLocaleTimeString('en-US', { hour12: false })}`;
     }
 
     const xhr = new XMLHttpRequest();
@@ -52,8 +52,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     // Get the currentTimeValue from the clock_in.js file and format it as HH:MM:SS
     const currentTimeValueFormatted = formatTime(currentTimeValue);
-
-    const data = `eid=${eid}&newStatus=${newStatus}&clockInTime=${clockInTime}&clockOutTime=${clockOutTime}&currentTimeValue=${currentTimeValueFormatted}`;
+    const data = `eid=${eid}&newStatus=${newStatus}&clockInTime=${clockInTime}&clockOutTime=${clockOutTime}&currentTimeValue=${currentTimeValueFormatted}&currentDate=${today}`;
     xhr.send(data);
     console.log(data);
   });
