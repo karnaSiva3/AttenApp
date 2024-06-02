@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // Add event listener to clockInBtn
   clockInBtn.addEventListener('click', function() {
-    const eid =27;
+    const eid =27;//Change EID value from here to see the change in value in the table
     let newStatus;
     let clockInTime;
     let clockOutTime;
@@ -54,7 +54,6 @@ window.addEventListener('DOMContentLoaded', function() {
     const currentTimeValueFormatted = formatTime(currentTimeValue);
     const data = `eid=${eid}&newStatus=${newStatus}&clockInTime=${clockInTime}&clockOutTime=${clockOutTime}&currentTimeValue=${currentTimeValueFormatted}&currentDate=${today}`;
     xhr.send(data);
-    console.log(data);
   });
 });
 
