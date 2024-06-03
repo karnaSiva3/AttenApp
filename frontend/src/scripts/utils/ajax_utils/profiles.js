@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 let cardElements = [];
-const itemsPerPage = 3;
+const itemsPerPage = 2;
 let currentPage = 1;
 let totalRows = 0;
 let data = [];
@@ -65,7 +65,31 @@ function populateCards(data) {
 
     const hiredateElement = document.createElement('p');
     hiredateElement.textContent = `Hire Date: ${row['Hire-Date']}`;
+    hiredateElement.style.marginBottom = '1rem';
     newCard.appendChild(hiredateElement);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.justifyContent = 'center';
+    buttonContainer.style.alignItems = 'center';
+    
+  
+    const transferButton = document.createElement('button');
+    transferButton.textContent = 'Transfer';
+    transferButton.classList.add('btn', 'btn-warning');
+    buttonContainer.appendChild(transferButton);
+
+    const contractButton = document.createElement('button');
+    contractButton.textContent = 'Contract';
+    contractButton.classList.add('btn', 'btn-success');
+    buttonContainer.appendChild(contractButton);
+
+    const offboardingButton = document.createElement('button');
+    offboardingButton.textContent = 'Offboard';
+    offboardingButton.classList.add('btn', 'btn-danger');
+    buttonContainer.appendChild(offboardingButton);
+
+    newCard.appendChild(buttonContainer);
 
     cardContainer.appendChild(newCard);
     cardElements.push(newCard);

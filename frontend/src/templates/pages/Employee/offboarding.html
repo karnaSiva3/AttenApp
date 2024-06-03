@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <title>ATTENAPP|Dashboard</title>
     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
-    <link rel="stylesheet" href="../../../assets/styles/form.css" />
+    <link rel="stylesheet" href="../../../assets/styles/form.css"
+     />
+     <link rel="stylesheet" href="../../../assets/styles/searchbar.css"/> 
+     <link rel="stylesheet" href="../../../assets/styles/table.css"/>
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <!-- Remixicon CDN Link -->
@@ -120,6 +123,30 @@
           <li ><a href="boarding.html">Onboarding</a></li>
           <li class="current"><a href="#">Offboarding</a></li>
         </ul>
+        <div id="searchbar">
+          <i class="ri-search-line" id="searchIcon"></i>
+          <input type="text" id="searchInput" placeholder="Search with EID,Name,Department" style="outline-color:#007bff;">
+        </div>
+
+        <table id="directoryTable">
+          <thead>
+              <tr>
+                  <th>EID</th>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Department</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+         <tbody id="tableBody">
+            <!-- data from backend -->
+         </tbody>
+       </table>
+        <div id="pagination">
+         <button id="prevPage" disabled>Previous</button>
+         <span id="currentPage"></span>
+         <button id="nextPage">Next</button>
+       </div>
      </section>
 
      
@@ -129,6 +156,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
-    <script src="../../../scripts/components/directoryForm.js"></script>
+    <script src="../../../scripts/utils/ajax_utils/offboarding.js"></script>
+    <script src="../../../scripts/components/table.js"></script>
   </body>
 </html>
