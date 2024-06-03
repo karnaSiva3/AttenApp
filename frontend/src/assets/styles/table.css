@@ -55,6 +55,14 @@
   color: white;
 }
 
+.page-content button{
+  height:2.5rem;
+  width:7.5rem;
+  padding:0.5rem;
+  margin:auto;
+  font-weight: bolder;
+  border-radius:1rem;
+}
 /* Pagination Styles */
 .page-content #pagination {
   margin-top: 20px;
