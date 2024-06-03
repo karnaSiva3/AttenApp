@@ -1,9 +1,6 @@
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-.page-content{
-    background:#dfe1e1;
-}
 
 .page-content .card{
   
@@ -38,3 +35,33 @@
 .page-content button:hover{
     background:#069a32;
  }
+
+ 
+ /* Pagination Styles */
+.page-content #pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .page-content #pagination button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-content #pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .page-content #pagination button:hover:enabled {
+    background-color: #45a049;
+  }
+  
+  .page-content #pageInfo {
+    margin: 0 10px;
+    font-weight: bold;
+  }

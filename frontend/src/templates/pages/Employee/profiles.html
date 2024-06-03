@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <title>ATTENAPP|Dashboard</title>
     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
+    <link rel="stylesheet" href="../../../assets/styles/searchbar.css"/>
+    <link rel="stylesheet" href="../../../assets/styles/card.css">
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <!-- Remixicon CDN Link -->
@@ -96,7 +98,7 @@
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">
-          <img src="src/assets/images/AdarshRai.jpg" alt="" />
+          <img src="../../../assets/images/UserProfile.jpeg" alt="" />
         </div>
       </nav>
     </section>
@@ -112,8 +114,20 @@
         </ul>
       </div>
      </section>
+     
      <section class="page-content"> 
-       
+      <div id="searchbar">
+        <i class="ri-search-line" id="searchIcon"></i>
+        <input type="text" id="searchInput" placeholder="Search with EID,Name,Department" style="outline-color:#007bff;">
+      </div>
+      <div id="cardContainer">
+        <!-- Card elements will be dynamically created and inserted here -->
+      </div>
+      <div id="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="currentPage"></span>
+        <button id="nextPage">Next</button>
+      </div>
      </section>
      
     <!-- bootstrap-->
@@ -122,5 +136,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
+    <script src="../../../scripts/utils/ajax_utils/profiles.js"></script>
   </body>
 </html>

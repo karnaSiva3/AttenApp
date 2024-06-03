@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 let tableRows = [];
-const itemsPerPage = 10;
+const itemsPerPage = 7;
 let currentPage = 1;
 let totalRows = 0;
 
