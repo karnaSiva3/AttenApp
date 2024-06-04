@@ -1,0 +1,66 @@
+/* Table Styles */
+.page-content #listtable #directoryTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+  }
+  
+  .page-content #directoryTable th,
+  .page-content #directoryTable td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .page-content #directoryTable th {
+    background-color: #e9f2ff;
+    font-weight: bold;
+  }
+  
+  .page-content #directoryTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .page-content #directoryTable tr:hover {
+    background:#e9f2ff;
+    color:#007bff;
+    font-weight: 600;
+  }
+
+  .page-content button{
+    height:2.5rem;
+    width:4.5rem;
+    padding:0.5rem;
+    margin:auto;
+    font-weight: bolder;
+    border-radius:1rem;
+  }
+  /* Pagination Styles */
+  .page-content #pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .page-content #pagination button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-content #pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .page-content #pagination button:hover:enabled {
+    background-color: #45a049;
+  }
+  
+  .page-content #pageInfo {
+    margin: 0 10px;
+    font-weight: bold;
+  }

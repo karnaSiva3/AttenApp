@@ -7,17 +7,16 @@
     width:auto;
     display:flex;
     flex-wrap: wrap;
-    justify-content:space-evenly;
+    justify-content:center;
     align-items:center;
 }
 .page-content .card{
   
     display:flex;
-    justify-content: center;
+    justify-content:start;
     flex-direction:column;
     align-items: center;
-    height:9rem;
-    width:35rem;
+    width:30rem;
     height:30rem;
     margin:25px;
     padding:2rem;

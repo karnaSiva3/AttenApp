@@ -7,7 +7,7 @@ const itemsPerPage = 2;
 let currentPage = 1;
 let totalRows = 0;
 let data = [];
-
+ 
 function fetchData() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://localhost/backend/ajax/profiles.php', true);
