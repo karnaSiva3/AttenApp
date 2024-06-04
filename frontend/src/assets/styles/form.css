@@ -53,11 +53,13 @@
   
   .page-content form .employee-details .form-group{
     margin-bottom: 15px;
-    width: calc(50% - 10px)
+    width: calc(33% - 10px);
+    display: flex;
   }
   .page-content form .employee-details .form-group label {
-    display: block;
+    display:block;
     font-weight: 500;
+    padding:5px;
     margin-bottom: 5px;
   }
   
