@@ -50,7 +50,13 @@ function populateCards(data) {
     photoContainer.classList.add('photo-container');
     const photo = document.createElement('img');
     photo.classList.add('photo');
-    photo.src = 'data:image/jpeg;base64,' + row.photo;
+    if (row.Photo && row.Photo.trim() !== '') {
+      photo.src = row.Photo;
+    } else {
+      // Use a default image or leave it empty
+      photo.src = '../../../assets/images/user-profile-absent';
+    }
+    console.log(row.photo);
     photoContainer.appendChild(photo);
     newCard.appendChild(photoContainer);
 

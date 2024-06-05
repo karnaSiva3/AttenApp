@@ -43,19 +43,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border:10px #007bff;
 }
 
 .page-content .photo {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   background-color: #ccc;
+  border:10px #007bff;
 }
 
 .page-content .details-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
  
