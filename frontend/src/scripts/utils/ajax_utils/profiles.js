@@ -42,38 +42,48 @@ function populateCards(data) {
   data.forEach(function(row) {
     const newCard = document.createElement('div');
     newCard.classList.add('card');
+    newCard.style.display = 'grid';
+    newCard.style.gridTemplateColumns = '1fr 3fr';
+    newCard.style.gap = '1rem';
+
+    const photoContainer = document.createElement('div');
+    photoContainer.classList.add('photo-container');
+    const photo = document.createElement('img');
+    photo.classList.add('photo');
+    photo.src = 'data:image/jpeg;base64,' + row.photo;
+    photoContainer.appendChild(photo);
+    newCard.appendChild(photoContainer);
+
+    const detailsContainer = document.createElement('div');
+    detailsContainer.classList.add('details-container');
 
     const eidElement = document.createElement('p');
     eidElement.textContent = `EID: ${row.eid}`;
-    newCard.appendChild(eidElement);
+    eidElement.style.fontWeight=`bolder`;
+    detailsContainer.appendChild(eidElement);
 
     const nameElement = document.createElement('p');
     nameElement.textContent = `Name: ${row.Name}`;
-    newCard.appendChild(nameElement);
+    nameElement.style.fontWeight=`bolder`;
+    detailsContainer.appendChild(nameElement);
 
     const positionElement = document.createElement('p');
     positionElement.textContent = `Position: ${row.position}`;
-    newCard.appendChild(positionElement);
+    positionElement.style.fontWeight=`bolder`;
+    detailsContainer.appendChild(positionElement);
 
     const departmentElement = document.createElement('p');
     departmentElement.textContent = `Department: ${row.Department}`;
-    newCard.appendChild(departmentElement);
+    departmentElement.style.fontWeight=`bolder`;
+    detailsContainer.appendChild(departmentElement);
 
-    const officeLocationElement = document.createElement('p');
-    officeLocationElement.textContent = `Office Location: ${row.office_location}`;
-    newCard.appendChild(officeLocationElement);
-
-    const hiredateElement = document.createElement('p');
-    hiredateElement.textContent = `Hire Date: ${row['Hire-Date']}`;
-    hiredateElement.style.marginBottom = '1rem';
-    newCard.appendChild(hiredateElement);
+    newCard.appendChild(detailsContainer);
 
     const buttonContainer = document.createElement('div');
     buttonContainer.style.display = 'flex';
-    buttonContainer.style.justifyContent = 'center';
-    buttonContainer.style.alignItems = 'center';
-    
-  
+    buttonContainer.style.justifyContent = 'flex-end';
+    buttonContainer.style.marginTop = '1rem';
+
     const transferButton = document.createElement('button');
     transferButton.textContent = 'Transfer';
     transferButton.classList.add('btn', 'btn-warning');
