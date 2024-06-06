@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 let cardElements = [];
-const itemsPerPage = 12;
+const itemsPerPage = 18;
 let currentPage = 1;
 let totalRows = 0;
 let data = [];
