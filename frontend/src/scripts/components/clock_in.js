@@ -32,6 +32,7 @@ function toggleClock() {
   }
 }
 
+
 // Wait for the DOM to be loaded before accessing the clockInBtn element
 window.addEventListener('DOMContentLoaded', function() {
   // Get the clockInBtn element from the DOM
@@ -40,4 +41,5 @@ window.addEventListener('DOMContentLoaded', function() {
   clockInBtn.addEventListener('click', toggleClock);
   // Start the timer display update
   setInterval(updateTimerDisplay, 1000);
+  
 });

@@ -12,8 +12,7 @@
     height:12.5rem;
     margin:25px;
     padding:1rem;
-    border-radius:10px;
-    box-shadow:1rem black;
+    border:none;
 }
 
 .page-content .card .total-hours{
@@ -24,7 +23,8 @@
 }
 
 .page-content .card .heading{
-    font-size:2.5rem;
+    font-size:3rem;
     font-weight: bolder;
-    margin:1rem;
+    color:black;
+
 }
