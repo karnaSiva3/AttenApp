@@ -15,9 +15,8 @@
     justify-content: center;
     flex-direction:column;
     align-items: center;
-    height:9rem;
-    width:30rem;
-    height:20rem;
+    height:17rem;
+    width:25rem;
     margin:20px;
     padding:2rem;
     border-radius:10px;
@@ -31,9 +30,9 @@
 
 }
 .page-content button{
-   height:2.5rem;
-   width:7.5rem;
-   padding:0.5rem;
+   height:2rem;
+   width:6rem;
+   padding:0.25rem;
    margin:auto;
    font-weight: bolder;
    border-radius:1rem;
@@ -47,8 +46,8 @@
 }
 
 .page-content .photo {
-  width: 110px;
-  height: 110px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: #ccc;
   border:10px #007bff;
@@ -57,7 +56,7 @@
 .page-content .details-container {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.1rem;
 }
 
  
@@ -65,7 +64,7 @@
 .page-content #pagination {
     margin-top: 10px;
     text-align: center;
-  }
+}
   
   .page-content #pagination button {
     padding: 4px 8px;

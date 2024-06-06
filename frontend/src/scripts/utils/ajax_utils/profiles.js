@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 let cardElements = [];
-const itemsPerPage = 2;
+const itemsPerPage = 12;
 let currentPage = 1;
 let totalRows = 0;
 let data = [];
@@ -53,10 +53,8 @@ function populateCards(data) {
     if (row.Photo && row.Photo.trim() !== '') {
       photo.src = row.Photo;
     } else {
-      // Use a default image or leave it empty
       photo.src = '../../../assets/images/user-profile-absent';
     }
-    console.log(row.photo);
     photoContainer.appendChild(photo);
     newCard.appendChild(photoContainer);
 
@@ -65,22 +63,26 @@ function populateCards(data) {
 
     const eidElement = document.createElement('p');
     eidElement.textContent = `EID: ${row.eid}`;
-    eidElement.style.fontWeight=`bolder`;
+    eidElement.style.fontSize = '0.95rem';
+    eidElement.style.fontWeight = 'bolder';
     detailsContainer.appendChild(eidElement);
 
     const nameElement = document.createElement('p');
     nameElement.textContent = `Name: ${row.Name}`;
-    nameElement.style.fontWeight=`bolder`;
+    nameElement.style.fontSize = '0.95rem';
+    nameElement.style.fontWeight = 'bolder';
     detailsContainer.appendChild(nameElement);
 
     const positionElement = document.createElement('p');
     positionElement.textContent = `Position: ${row.position}`;
-    positionElement.style.fontWeight=`bolder`;
+    positionElement.style.fontSize = '0.95rem';
+    positionElement.style.fontWeight = 'bolder';
     detailsContainer.appendChild(positionElement);
 
     const departmentElement = document.createElement('p');
     departmentElement.textContent = `Department: ${row.Department}`;
-    departmentElement.style.fontWeight=`bolder`;
+    departmentElement.style.fontWeight = 'bolder';
+    departmentElement.style.fontSize = '0.95rem';
     detailsContainer.appendChild(departmentElement);
 
     newCard.appendChild(detailsContainer);
@@ -174,20 +176,16 @@ function handleSearch() {
     const name = row.Name.toLowerCase();
     const department = row.Department.toLowerCase();
     const position = row.position.toLowerCase();
-    const hireDate = row['Hire-Date'].toLowerCase();
-    const officeLocation = row.office_location.toLowerCase();
 
     return (
       eid.includes(searchValue) ||
       name.includes(searchValue) ||
       department.includes(searchValue) ||
-      position.includes(searchValue) ||
-      hireDate.includes(searchValue) ||
-      officeLocation.includes(searchValue)
+      position.includes(searchValue)
     );
   });
 
   populateCards(filteredData);
   updatePagination(filteredData.length);
-  displayPage(1); 
+  displayPage(1);
 }
