@@ -1,0 +1,68 @@
+.page-content h1 {
+    font-size: 2rem;
+    font-weight: bolder;
+    text-align: center;
+    padding: 1rem;
+    color: #1d45c0;
+}
+
+.page-content form {
+    max-width: 700px;
+    width: 50%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin: auto;
+}
+
+.page-content form .form-group {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
+    margin-bottom: 15px;
+}
+
+.page-content form .form-group label {
+    font-weight: 500;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+    text-align: right;
+}
+
+.page-content form .form-group input,
+.page-content form .form-group select,
+.page-content form .form-group textarea {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.page-content form .form-group textarea {
+    height: auto;
+    padding: 10px 15px;
+}
+
+.page-content form .form-group input:focus,
+.page-content form .form-group input:valid,
+.page-content form .form-group textarea:focus,
+.page-content form .form-group textarea:valid {
+    border-color: #007bff;
+}
+
+.page-content form button {
+    width: 100%;
+    text-align: center;
+    height: 3rem;
+    background: #1d45c0;
+    font-weight: bolder;
+    color: white;
+    border-radius:0.5rem;
+}

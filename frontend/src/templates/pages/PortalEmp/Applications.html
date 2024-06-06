@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <title>ATTENAPP|Employee</title>
     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
-    <link rel="stylesheet" href="../../../assets/styles/card.css">
+    <link rel="stylesheet" href="../../../assets/styles/applicationscard.css" />
     <!-- jquery cdn link -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css" />
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <!-- Remixicon CDN Link -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet" />
     <!-- Bootstrap CDN Link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <!-- tailwindcss -->
     <script src="https://cdn.tailwindcss.com"></script>
-   
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
@@ -31,18 +35,15 @@
             <span class="links_name">Home</span>
           </a>
         </li>
-       
       </ul>
-
-      <button class ="btn btn-primary">
+      <button class="btn btn-primary">
         <i class="ri-arrow-left-line"></i>
         Back
       </button>
     </div>
-
     <!-- home-section -->
     <section class="home-section">
-       <!-- main-navbar -->
+      <!-- main-navbar -->
       <nav>
         <div class="sidebar-button">
           <i class="bx bx-menu sidebarBtn"></i>
@@ -55,32 +56,61 @@
           <img src="../../../assets/images/UserProfile.jpeg" alt="" />
         </div>
       </nav>
-     </section>
-
-     <!-- sub nav bar -->
-     <section class="home-content">
-       <div class="subnav">
+    </section>
+    <!-- sub nav bar -->
+    <section class="home-content">
+      <div class="subnav">
         <ul>
-          <li  ><a href="Employee.html">Attendence</a></li>
-          <li class="current"><a href=#>Applications</a></li>
+          <li><a href="Employee.html">Attendence</a></li>
+          <li class="current"><a href="#">Applications</a></li>
           <li><a href="EmpAnalytics.html">Analytics</a></li>
           <li><a href="Salary.html">Salary & Perks</a></li>
         </ul>
       </div>
-     </section>
+    </section>
+    <section class="page-content">
+      <h1>Leave Application Form</h1>
+      <form>
+        <div class="form-group">
+          <label for="leave-type">Leave Type:</label>
+          <select id="leave-type" name="leave-type" required>
+            <option value="">Select Leave Type</option>
+            <option value="medical">Medical Leave</option>
+            <option value="personal">Personal Leave</option>
+            <option value="exam">Exam Leave</option>
+            <option value="emergency">Emergency Leave</option>
+          </select>
+        </div>
 
-  <section class="page-content">
-    
- </section>
+        <div class="form-group">
+          <label for="start-date">Start Date:</label>
+          <input type="date" id="start-date" name="start-date" required />
+        </div>
+
+        <div class="form-group">
+          <label for="end-date">End Date:</label>
+          <input type="date" id="end-date" name="end-date" required />
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason:</label>
+          <textarea id="reason" name="reason" required></textarea>
+        </div>
+
+        <button type="submit" class="button">Apply</button>
+      </form>
+    </section>
     <!-- bootstrap-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
-    <script src="../../../scripts/components/clock_in.js"></script>
-    <script src="../../../scripts/utils/ajax_utils/status.js">  
-    </script>
+    <script src="../../../scripts/utils/ajax_utils/applications.js"></script>
   </body>
 </html>
