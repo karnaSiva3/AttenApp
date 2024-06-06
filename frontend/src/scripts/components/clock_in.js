@@ -1,4 +1,3 @@
-// Declare clockInBtn as a global variable
 let clockInBtn;
 let currentTimeValue;
 const totalHoursText = document.querySelector('.total-hours');
@@ -37,10 +36,8 @@ function toggleClock() {
 window.addEventListener('DOMContentLoaded', function() {
   // Get the clockInBtn element from the DOM
   clockInBtn = document.querySelector('.clock-in');
-
   // Add event listener to clockInBtn
   clockInBtn.addEventListener('click', toggleClock);
-
   // Start the timer display update
   setInterval(updateTimerDisplay, 1000);
 });

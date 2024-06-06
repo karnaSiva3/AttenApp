@@ -9,9 +9,9 @@
     flex-direction:column;
     align-items: center;
     width:auto;
-    height:10rem;
+    height:12.5rem;
     margin:25px;
-    padding:2rem;
+    padding:1rem;
     border-radius:10px;
     box-shadow:1rem black;
 }
@@ -23,11 +23,8 @@
     margin:1rem;
 }
 
-button{
-
-    height:1.5rem;
-    width:4rem;
-    padding:0.5rem;
-    border-radius:1.5rem;
-    background: #007bff;
+.page-content .card .heading{
+    font-size:2.5rem;
+    font-weight: bolder;
+    margin:1rem;
 }
