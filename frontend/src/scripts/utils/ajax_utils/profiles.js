@@ -45,6 +45,7 @@ function populateCards(data) {
     newCard.style.display = 'grid';
     newCard.style.gridTemplateColumns = '1fr 3fr';
     newCard.style.gap = '1rem';
+    newCard.style.position = 'relative'; // Added for absolute positioning of the icon button
 
     const photoContainer = document.createElement('div');
     photoContainer.classList.add('photo-container');
@@ -63,32 +64,37 @@ function populateCards(data) {
 
     const eidElement = document.createElement('p');
     eidElement.textContent = `EID: ${row.eid}`;
-    eidElement.style.fontSize = '0.90rem';
+    eidElement.style.fontSize = '1rem';
+    eidElement.style.marginBottom='0.5rem';
     eidElement.style.fontWeight = 'bolder';
     detailsContainer.appendChild(eidElement);
 
     const nameElement = document.createElement('p');
     nameElement.textContent = `Name: ${row.Name}`;
-    nameElement.style.fontSize = '0.90rem';
-    nameElement.style.fontWeight = 'bolder';
+    nameElement.style.fontSize = '1rem';
+    nameElement.style.marginBottom='0.5rem';
+    nameElement.style.fontWeight='bolder';
     detailsContainer.appendChild(nameElement);
 
     const positionElement = document.createElement('p');
     positionElement.textContent = `Position: ${row.position}`;
     positionElement.style.fontSize = '0.90rem';
     positionElement.style.fontWeight = 'bolder';
+    positionElement.style.display='none';
     detailsContainer.appendChild(positionElement);
 
     const departmentElement = document.createElement('p');
     departmentElement.textContent = `Department: ${row.Department}`;
     departmentElement.style.fontWeight = 'bolder';
     departmentElement.style.fontSize = '0.90rem';
+    departmentElement.style.display='none';
     detailsContainer.appendChild(departmentElement);
 
-    const officeLocationElement =document.createElement('p');
-    officeLocationElement .textContent =`Office-Location: ${row.office_location}`
-    officeLocationElement.style.fontWeight='bolder';
-    officeLocationElement.style.fontSize='0.90rem';
+    const officeLocationElement = document.createElement('p');
+    officeLocationElement.textContent = `Office-Location: ${row.office_location}`;
+    officeLocationElement.style.fontWeight = 'bolder';
+    officeLocationElement.style.fontSize = '0.90rem';
+    officeLocationElement.style.display='none';
     detailsContainer.appendChild(officeLocationElement);
 
     newCard.appendChild(detailsContainer);
@@ -120,6 +126,26 @@ function populateCards(data) {
 
     newCard.appendChild(buttonContainer);
 
+    // Creating the icon button
+    const iconButton = document.createElement('button');
+    iconButton.style.position = 'absolute';
+    iconButton.style.top = '10px';
+    iconButton.style.left = '350px';
+    iconButton.style.border = 'none';
+    iconButton.style.cursor = 'pointer';
+
+    const iconImage = document.createElement('img');
+    iconImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAAXNSR0IArs4c6QAAAX5JREFUOE+tlD8sQ3EQxz8XwcBoqXTpgB0DZSIRCRZilVRiJ5heEx36ytAIE+lgZEAi2KyCQSsSE4mNSrrWovR4fXlpq6/t8+fGd3ef3Pf3vnfCP4bUZK1oO+8MAAEgjXBFVB6q9VTCprWBLmZQZoFBl8YblD2a2CIi2dJ8OSyireQ4AoY9qL9DGSEmaae2HGboKTDmAeSUJMnQT0Jy1ociLKyTKIcuIOutEigTQHdFXpgnKpvlMEOvgR4XWBJTejE0AcxV5JVnYvhB1J4srAGUxyrysghJlE7A51qTJ8iqXNowQ6eAg1/DYBFT1p3JQig7VWC1ZdpNG5iy4MDGUU5+DVPCxMS0YRFtI0fmDzDLb2el1jhHC6vzPerJzHCPj335KMIMtXx0/GOfwTKmxMt9Zv9VC2ZBvUaKDH2VG2C1L2kLzYXphjzQbmlklIi8OLXuV6ODEEIICLpAU18G3uWNbeLyWpqvd8/85ApA6549keeCNam2KSWL7kFXvZJPUp+GFLIDtd4AAAAASUVORK5CYII=';
+    iconImage.alt = 'Icon';
+    iconImage.style.width = '28px'; 
+    iconImage.style.height = '28px';
+    iconButton.appendChild(iconImage);
+
+    // Add click event listener to the icon button if needed
+    iconButton.addEventListener('click', showEmployeeInfo);
+
+    newCard.appendChild(iconButton);
+
     cardContainer.appendChild(newCard);
     cardElements.push(newCard);
   });
@@ -127,6 +153,108 @@ function populateCards(data) {
   displayPage(1);
 }
 
+function showEmployeeInfo(event) {
+  event.stopPropagation();
+
+  const card = event.target.closest('.card');
+  const eid = card.querySelector('.details-container p:first-child').textContent.split(':')[1].trim();
+  const name = card.querySelector('.details-container p:nth-child(2)').textContent.split(':')[1].trim();
+  const position = card.querySelector('.details-container p:nth-child(3)').textContent.split(':')[1].trim();
+  const department = card.querySelector('.details-container p:nth-child(4)').textContent.split(':')[1].trim();
+  const officeLocation = card.querySelector('.details-container p:nth-child(5)').textContent.split(':')[1].trim();
+
+  // Find the employee data from the fetched data
+  const employeeData = data.find(row => row.eid === eid);
+  const hireDate = employeeData ? employeeData['Hire-date'] : 'Unknown';
+  const salary = employeeData ? employeeData.Salary : 'Unknown';
+
+  const cardRect = card.getBoundingClientRect();
+  const cardTop = cardRect.top + window.scrollY;
+  const cardLeft = cardRect.left + window.scrollX;
+
+  const employeeInfoCard = document.createElement('div');
+  employeeInfoCard.style.height = '18rem';
+  employeeInfoCard.style.width = '25rem';
+  employeeInfoCard.style.borderRadius = '10px';
+  employeeInfoCard.style.background = '#e4e1e1';
+  employeeInfoCard.style.padding = '2rem';
+  employeeInfoCard.style.position = 'absolute';
+  employeeInfoCard.style.top = `${cardTop}px`;
+  employeeInfoCard.style.left = `${cardLeft}px`;
+  employeeInfoCard.style.backgroundColor = 'white';
+  employeeInfoCard.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+  employeeInfoCard.style.zIndex = '999';
+  employeeInfoCard.style.display = 'grid';
+  employeeInfoCard.style.gridTemplateColumns = '1fr 3fr';
+  employeeInfoCard.style.gap = '1rem';
+
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.textContent = '×';
+  closeButton.style.position = 'absolute';
+  closeButton.style.top = '10px';
+  closeButton.style.right = '10px';
+  closeButton.style.background = 'none';
+  closeButton.style.border = 'none';
+  closeButton.style.fontSize = '2rem';
+  closeButton.style.fontWeight = 'bold';
+  closeButton.style.color = '#666';
+  closeButton.style.cursor = 'pointer';
+  closeButton.addEventListener('click', () => employeeInfoCard.remove());
+  employeeInfoCard.appendChild(closeButton);
+
+  const titleElement = document.createElement('h3');
+  titleElement.textContent = 'Employee Information';
+  titleElement.style.marginTop = '0';
+  titleElement.style.fontSize='1.5rem';
+  titleElement.style.fontWeight='bolder';
+  titleElement.style.color='#007bff';
+  titleElement.style.gridColumn = '1 / -1';
+  employeeInfoCard.appendChild(titleElement);
+
+  const detailsContainer = document.createElement('div');
+  detailsContainer.style.gridColumn = '1/ -1';
+
+  const nameElement = document.createElement('p');
+  nameElement.textContent = `Name: ${name}`;
+  nameElement.style.fontWeight = 'bold';
+  detailsContainer.appendChild(nameElement);
+
+  const positionElement = document.createElement('p');
+  positionElement.textContent = `Position: ${position}`;
+  positionElement.style.fontWeight='bold';
+  detailsContainer.appendChild(positionElement);
+
+  const departmentElement = document.createElement('p');
+  departmentElement.textContent = `Department: ${department}`;
+  departmentElement.style.fontWeight='bold';
+  detailsContainer.appendChild(departmentElement);
+
+  const salaryElement = document.createElement('p');
+  salaryElement.textContent = `Salary: ${salary}`;
+  salaryElement.style.fontWeight='bold';
+  detailsContainer.appendChild(salaryElement);
+
+  const officeLocationElement = document.createElement('p');
+  officeLocationElement.textContent = `Office Location: ${officeLocation}`;
+  officeLocationElement.style.fontWeight='bold';
+  detailsContainer.appendChild(officeLocationElement);
+
+  const hireDateElement = document.createElement('p');
+  hireDateElement.textContent = `Hire Date: ${hireDate}`;
+  hireDateElement.style.fontWeight='bold';
+  detailsContainer.appendChild(hireDateElement);
+
+  employeeInfoCard.appendChild(detailsContainer);
+
+  document.body.appendChild(employeeInfoCard);
+
+  document.addEventListener('click', function(event) {
+    if (!employeeInfoCard.contains(event.target)) {
+      employeeInfoCard.remove();
+    }
+  });
+}
 function showTransferForm(event) {
   event.stopPropagation();
 
@@ -163,7 +291,7 @@ function showTransferForm(event) {
   closeButton.style.right = '10px';
   closeButton.style.background = 'none';
   closeButton.style.border = 'none';
-  closeButton.style.fontSize = '1.5rem';
+  closeButton.style.fontSize = '2rem';
   closeButton.style.fontWeight = 'bold';
   closeButton.style.color = '#666';
   closeButton.style.cursor = 'pointer';
@@ -208,13 +336,14 @@ function showTransferForm(event) {
 
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
-  submitButton.textContent = 'Update & Return';
+  submitButton.textContent = 'Update';
+  submitButton.style.fontWeight='bolder';
   submitButton.classList.add('btn', 'btn-primary');
   submitButton.style.marginTop = '1rem';
   form.appendChild(submitButton);
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
 
     const newDepartment = departmentInput.value;
     const newOfficeLocation = officeLocationInput.value;
