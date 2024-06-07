@@ -7,6 +7,9 @@ const itemsPerPage = 5;
 let currentPage = 1;
 let totalRows = 0;
 
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
 function fetchTableData() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://localhost/backend/ajax/offboarding.php', true);
@@ -53,19 +56,20 @@ function populateTable(data) {
         newRow.appendChild(salaryCell);
 
         const actionsCell = document.createElement('td');
-        
 
-        const button1 = document.createElement('button');
-        button1.textContent = 'Reconsider';
-        button1.classList.add('btn', 'btn-warning');
-        button1.style.marginRight ='2rem';
-        actionsCell.appendChild(button1);
+        const reconsiderButton = document.createElement('button');
+        reconsiderButton.textContent = 'Reconsider';
+        reconsiderButton.classList.add('btn', 'btn-warning');
+        reconsiderButton.style.marginRight = '2rem';
+        reconsiderButton.addEventListener('click', () => handleAction(row.eid, 'Reconsider'));
+        actionsCell.appendChild(reconsiderButton);
 
-        const button2 = document.createElement('button');
-        button2.textContent = 'Discharged';
-        button2.classList.add('btn', 'btn-danger');
-        button2.style.marginRight ='2rem';
-        actionsCell.appendChild(button2);
+        const dischargeButton = document.createElement('button');
+        dischargeButton.textContent = 'Discharged';
+        dischargeButton.classList.add('btn', 'btn-danger');
+        dischargeButton.style.marginRight = '2rem';
+        dischargeButton.addEventListener('click', () => handleAction(row.eid, 'Discharged'));
+        actionsCell.appendChild(dischargeButton);
 
         newRow.appendChild(actionsCell);
 
@@ -75,28 +79,38 @@ function populateTable(data) {
     displayPage(1);
 }
 
-// Search functionality
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', filterTable);
+async function handleAction(eid, action) {
+    try {
+        const response = await fetch('http://localhost/backend/ajax/discharge.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+             eid: eid,
+                action: action
+            })
+        });
 
-function filterTable() {
-    const searchValue = searchInput.value.toLowerCase();
-    const filteredRows = tableRows.filter(row => {
-        const cells = row.getElementsByTagName('td');
-        for (let i = 0; i < cells.length; i++) {
-            const cellValue = cells[i].textContent.toLowerCase();
-            if (cellValue.includes(searchValue)) {
-                return true;
-            }
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return false;
-    });
 
-    tableRows.forEach(row => row.style.display = 'none');
-    filteredRows.forEach(row => row.style.display = '');
+        const data = await response.json();
+        console.log('Success:', data);
 
-    updatePagination(filteredRows.length);
-    displayPage(1);
+        // Here you can handle the response from the server
+        
+        if (data.status === 'success') {
+            alert(`Employee ${eid} was ${action.toLowerCase()} successfully.`);
+            fetchTableData(); // Refetch data to update the table
+        } else {
+            alert(`Failed to ${action.toLowerCase()} employee ${eid}. Error: ${data.message}`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert(`Failed to perform action. Error: ${error.message}`);
+    }
 }
 
 // Pagination functionality
@@ -147,3 +161,23 @@ prevPageBtn.addEventListener('click', () => {
 nextPageBtn.addEventListener('click', () => {
     displayPage(currentPage + 1);
 });
+
+function filterTable() {
+  const searchValue = searchInput.value.toLowerCase();
+  const filteredRows = tableRows.filter(row => {
+    const cells = row.getElementsByTagName('td');
+    for (let i = 0; i < cells.length; i++) {
+      const cellValue = cells[i].textContent.toLowerCase();
+      if (cellValue.includes(searchValue)) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  tableRows.forEach(row => row.style.display = 'none');
+  filteredRows.forEach(row => row.style.display = '');
+
+  updatePagination(filteredRows.length);
+  displayPage(1);
+}
