@@ -115,6 +115,7 @@ function populateCards(data) {
     contractButton.textContent = 'Contract';
     contractButton.style.backgroundColor = '#28a745';
     contractButton.style.color = 'white';
+    contractButton.addEventListener('click', showContractForm);
     buttonContainer.appendChild(contractButton);
 
     const offboardingButton = document.createElement('button');
@@ -394,6 +395,146 @@ function showTransferForm(event) {
     }
   });
 }
+
+function showContractForm(event) {
+  event.stopPropagation();
+
+  const card = event.target.closest('.card');
+  const eid = card.querySelector('.details-container p:first-child').textContent.split(':')[1].trim();
+  const position = card.querySelector('.details-container p:nth-child(3)').textContent.split(':')[1].trim();
+  
+  // Find the employee data from the fetched data
+  const employeeData = data.find(row => row.eid === eid);
+  const salary = employeeData ? employeeData.Salary : 'Unknown';
+
+  const cardRect = card.getBoundingClientRect();
+  const cardTop = cardRect.top + window.scrollY;
+  const cardLeft = cardRect.left + window.scrollX;
+
+  const contractCard = document.createElement('div');
+  contractCard.style.height = 'auto';
+  contractCard.style.width = '25rem';
+  contractCard.style.borderRadius = '10px';
+  contractCard.style.background = '#e4e1e1';
+  contractCard.style.padding = '2rem';
+  contractCard.style.position = 'absolute';
+  contractCard.style.top = `${cardTop}px`;
+  contractCard.style.left = `${cardLeft}px`;
+  contractCard.style.backgroundColor = 'white';
+  contractCard.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+  contractCard.style.zIndex = '999';
+
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.textContent = '×';
+  closeButton.style.position = 'absolute';
+  closeButton.style.top = '10px';
+  closeButton.style.right = '10px';
+  closeButton.style.background = 'none';
+  closeButton.style.border = 'none';
+  closeButton.style.fontSize = '2rem';
+  closeButton.style.fontWeight = 'bold';
+  closeButton.style.color = '#666';
+  closeButton.style.cursor = 'pointer';
+  closeButton.addEventListener('click', () => contractCard.remove());
+  contractCard.appendChild(closeButton);
+
+  const eidElement = document.createElement('p');
+  eidElement.textContent = `EID: ${eid}`;
+  eidElement.style.fontWeight = 'bold';
+  contractCard.appendChild(eidElement);
+
+  const form = document.createElement('form');
+  form.style.display = 'flex';
+  form.style.flexDirection = 'column';
+  form.style.gap = '0.25rem';
+
+  const positionLabel = document.createElement('label');
+  positionLabel.textContent = 'Position:';
+  positionLabel.style.fontWeight = 'bold';
+  form.appendChild(positionLabel);
+
+  const positionInput = document.createElement('input');
+  positionInput.type = 'text';
+  positionInput.value = position;
+  positionInput.style.padding = '0.5rem';
+  positionInput.style.borderRadius = '5px';
+  positionInput.style.border = '1px solid #ccc';
+  form.appendChild(positionInput);
+
+  const salaryLabel = document.createElement('label');
+  salaryLabel.textContent = 'Salary:';
+  salaryLabel.style.fontWeight = 'bold';
+  form.appendChild(salaryLabel);
+
+  const salaryInput = document.createElement('input');
+  salaryInput.type = 'text';
+  salaryInput.value = salary;
+  salaryInput.style.padding = '0.5rem';
+  salaryInput.style.borderRadius = '5px';
+  salaryInput.style.border = '1px solid #ccc';
+  form.appendChild(salaryInput);
+
+  const submitButton = document.createElement('button');
+  submitButton.type = 'submit';
+  submitButton.textContent = 'Update';
+  submitButton.style.fontWeight = 'bolder';
+  submitButton.classList.add('btn', 'btn-primary');
+  submitButton.style.marginTop = '1rem';
+  form.appendChild(submitButton);
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault(); 
+  
+    const newPosition = positionInput.value;
+    const newSalary = salaryInput.value;
+  
+    try {
+      const response = await fetch('http://localhost/backend/ajax/contract.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          eid: eid,
+          position: newPosition,
+          salary: newSalary
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log('Success:', data);
+  
+      // Update the card with new data
+      card.querySelector('.details-container p:nth-child(3)').textContent = `Position: ${newPosition}`;
+      // You might also want to update other parts of the UI here
+  
+      // Show an alert for successful update
+      alert(`Employee ${eid}'s contract has been successfully updated. New position: ${newPosition}, New salary: ${newSalary}`);
+  
+      contractCard.remove(); // Close the contract form
+    } catch (error) {
+      console.error('Error:', error);
+      // Show an alert for failed update
+      alert(`Failed to update contract for employee ${eid}. Error: ${error.message}`);
+    }
+  });
+
+  contractCard.appendChild(form);
+
+  document.body.appendChild(contractCard);
+
+  document.addEventListener('click', function(event) {
+    if (!contractCard.contains(event.target)) {
+      contractCard.remove();
+    }
+  });
+}
+
 // Pagination functionality
 const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
