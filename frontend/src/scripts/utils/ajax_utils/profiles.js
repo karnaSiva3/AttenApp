@@ -342,37 +342,47 @@ function showTransferForm(event) {
   submitButton.style.marginTop = '1rem';
   form.appendChild(submitButton);
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault(); 
-
+  
     const newDepartment = departmentInput.value;
     const newOfficeLocation = officeLocationInput.value;
-
-    // Here you would typically send this data to your server using AJAX
-    fetch('http://localhost/backend/ajax/update_employee.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        eid: eid,
-        department: newDepartment,
-        office_location: newOfficeLocation
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
+  
+    try {
+      const response = await fetch('http://localhost/backend/ajax/transfer.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          eid: eid,
+          department: newDepartment,
+          office_location: newOfficeLocation
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
       console.log('Success:', data);
+  
       // Update the card with new data
       card.querySelector('.details-container p:nth-child(4)').textContent = `Department: ${newDepartment}`;
       // You might also want to update other parts of the UI here
-
+  
+      // Show an alert for successful update
+      alert(`Employee ${eid} has been successfully transferred to ${newDepartment} department at ${newOfficeLocation} office.`);
+  
       transferCard.remove(); // Close the transfer form
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('Error:', error);
-    });
+      // Show an alert for failed update
+      alert(`Failed to transfer employee ${eid}. Error: ${error.message}`);
+    }
   });
+
 
   transferCard.appendChild(form);
 
