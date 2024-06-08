@@ -45,7 +45,7 @@ function populateCards(data) {
     newCard.style.display = 'grid';
     newCard.style.gridTemplateColumns = '1fr 3fr';
     newCard.style.gap = '1rem';
-    newCard.style.position = 'relative'; // Added for absolute positioning of the icon button
+    newCard.style.position = 'relative';
 
     const photoContainer = document.createElement('div');
     photoContainer.classList.add('photo-container');
@@ -65,36 +65,36 @@ function populateCards(data) {
     const eidElement = document.createElement('p');
     eidElement.textContent = `EID: ${row.eid}`;
     eidElement.style.fontSize = '1rem';
-    eidElement.style.marginBottom='0.5rem';
+    eidElement.style.marginBottom = '0.5rem';
     eidElement.style.fontWeight = 'bolder';
     detailsContainer.appendChild(eidElement);
 
     const nameElement = document.createElement('p');
     nameElement.textContent = `Name: ${row.Name}`;
     nameElement.style.fontSize = '1rem';
-    nameElement.style.marginBottom='0.5rem';
-    nameElement.style.fontWeight='bolder';
+    nameElement.style.marginBottom = '0.5rem';
+    nameElement.style.fontWeight = 'bolder';
     detailsContainer.appendChild(nameElement);
 
     const positionElement = document.createElement('p');
     positionElement.textContent = `Position: ${row.position}`;
     positionElement.style.fontSize = '0.90rem';
     positionElement.style.fontWeight = 'bolder';
-    positionElement.style.display='none';
+    positionElement.style.display = 'none';
     detailsContainer.appendChild(positionElement);
 
     const departmentElement = document.createElement('p');
     departmentElement.textContent = `Department: ${row.Department}`;
     departmentElement.style.fontWeight = 'bolder';
     departmentElement.style.fontSize = '0.90rem';
-    departmentElement.style.display='none';
+    departmentElement.style.display = 'none';
     detailsContainer.appendChild(departmentElement);
 
     const officeLocationElement = document.createElement('p');
     officeLocationElement.textContent = `Office-Location: ${row.office_location}`;
     officeLocationElement.style.fontWeight = 'bolder';
     officeLocationElement.style.fontSize = '0.90rem';
-    officeLocationElement.style.display='none';
+    officeLocationElement.style.display = 'none';
     detailsContainer.appendChild(officeLocationElement);
 
     newCard.appendChild(detailsContainer);
@@ -123,11 +123,18 @@ function populateCards(data) {
     offboardingButton.style.backgroundColor = '#dc3545';
     offboardingButton.style.color = 'white';
     offboardingButton.style.cursor = 'pointer';
+    offboardingButton.addEventListener('click', function() {offboardEmployee({
+      eid: row.eid,
+      name: row.Name,
+      position: row.position,
+      department: row.Department,
+      salary: row.Salary
+    });
+    });
     buttonContainer.appendChild(offboardingButton);
 
     newCard.appendChild(buttonContainer);
 
-    // Creating the icon button
     const iconButton = document.createElement('button');
     iconButton.style.position = 'absolute';
     iconButton.style.top = '10px';
@@ -142,7 +149,6 @@ function populateCards(data) {
     iconImage.style.height = '28px';
     iconButton.appendChild(iconImage);
 
-    // Add click event listener to the icon button if needed
     iconButton.addEventListener('click', showEmployeeInfo);
 
     newCard.appendChild(iconButton);
@@ -152,6 +158,31 @@ function populateCards(data) {
   });
 
   displayPage(1);
+}
+
+function offboardEmployee(employeeData) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost/backend/ajax/offboardtable.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 201) {
+        console.log(xhr.responseText);
+        window.location.href = 'http://127.0.0.1:5500/frontend/src/templates/pages/Employee/offboarding.html';
+      } else {
+        console.error('Error:', xhr.status, xhr.responseText);
+        alert('Failed to offboard employee. Please try again.');
+      }
+    }
+  };
+  const employeeDataWithJobTitle = {
+    eid: employeeData.eid,
+    name: employeeData.name,
+    jobTitle: employeeData.position, 
+    department: employeeData.department,
+    salary: employeeData.salary
+  };
+  xhr.send(JSON.stringify(employeeDataWithJobTitle));
 }
 
 function showEmployeeInfo(event) {
