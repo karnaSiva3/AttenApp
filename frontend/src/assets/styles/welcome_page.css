@@ -139,7 +139,7 @@ a {
     padding: 0 30px;
     color: #333;
     transition: all 0.2s ease;
-    border-bottom: 1.5px solid #aaaaaa;
+    border-bottom: 1.35px solid #aaaaaa;
 }
 .input_box input:focus {
     border-color: #7d2ae8;  

@@ -238,7 +238,7 @@ function showEmployeeInfo(event) {
   const titleElement = document.createElement('h3');
   titleElement.textContent = 'Employee Information';
   titleElement.style.marginTop = '0';
-  titleElement.style.fontSize='1.5rem';
+  titleElement.style.fontSize='1.35rem';
   titleElement.style.fontWeight='bolder';
   titleElement.style.color='#007bff';
   titleElement.style.gridColumn = '1 / -1';
