@@ -1,13 +1,17 @@
+.page-content{
+    background:#e4e1e1;
+}
 .page-content h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bolder;
     text-align: center;
     padding: 1rem;
+    margin:1.5rem;
     color: #1d45c0;
 }
 
 .page-content form {
-    max-width: 700px;
+    max-width: 600px;
     width: 50%;
     background-color: #fff;
     padding: 25px 30px;

@@ -13,7 +13,7 @@ function fetchTableData() {
   xhr.open('GET', 'http://localhost/backend/ajax/attendence.php', true);
   xhr.onload = function() {
     if (xhr.status === 200) {
-      data = JSON.parse(xhr.responseText); // Assign the fetched data to the global data variable
+      data = JSON.parse(xhr.responseText); 
       totalRows = data.length;
       populateTable(data);
       updatePagination(totalRows);
@@ -95,7 +95,6 @@ async function showApplicationInfo(event) {
   leaveInfoCard.style.zIndex = '999';
   leaveInfoCard.style.display = 'flex';
   leaveInfoCard.style.flexDirection = 'column';
-  leaveInfoCard.style.overflowY = 'auto';
 
   // Create close button
   const closeButton = document.createElement('button');
@@ -106,7 +105,7 @@ async function showApplicationInfo(event) {
   closeButton.style.background = 'none';
   closeButton.style.border = 'none';
   closeButton.style.fontSize = '3rem';
-  closeButton.style.fontWeight = 'bold';
+  closeButton.style.fontWeight = '600';
   closeButton.style.color = 'red';
   closeButton.style.cursor = 'pointer';
   closeButton.addEventListener('click', () => leaveInfoCard.remove());
@@ -116,7 +115,7 @@ async function showApplicationInfo(event) {
   titleElement.textContent = 'Application Information';
   titleElement.style.marginTop = '0';
   titleElement.style.fontSize = '2.2rem';
-  titleElement.style.fontWeight = 'bolder';
+  titleElement.style.fontWeight = 'bold';
   titleElement.style.color = '#007bff';
   titleElement.style.marginBottom = '2.5rem';
   leaveInfoCard.appendChild(titleElement);
@@ -124,41 +123,47 @@ async function showApplicationInfo(event) {
   const detailsContainer = document.createElement('div');
   detailsContainer.style.display = 'flex';
   detailsContainer.style.flexDirection = 'column';
-  detailsContainer.style.gap = '2rem';
+  detailsContainer.style.gap = '1.75rem';
+
+  const idElement = document.createElement('p');
+  idElement.textContent = `Application ID: ${leaveData.id}`;
+  idElement.style.fontWeight = '600';
+  idElement.style.fontSize = '1.35rem';
+  detailsContainer.appendChild(idElement);
 
   const nameElement = document.createElement('p');
   nameElement.textContent = `Name: ${leaveData.Name}`;
-  nameElement.style.fontWeight = 'bold';
+  nameElement.style.fontWeight = '600';
   nameElement.style.fontSize = '1.35rem';
   detailsContainer.appendChild(nameElement);
 
   const departmentElement = document.createElement('p');
   departmentElement.textContent = `Department: ${leaveData.Department}`;
-  departmentElement.style.fontWeight = 'bold';
+  departmentElement.style.fontWeight = '600';
   departmentElement.style.fontSize = '1.35rem';
   detailsContainer.appendChild(departmentElement);
 
   const leaveTypeElement = document.createElement('p');
   leaveTypeElement.textContent = `Leave Type: ${leaveData.leave_type}`;
-  leaveTypeElement.style.fontWeight = 'bold';
+  leaveTypeElement.style.fontWeight = '600';
   leaveTypeElement.style.fontSize = '1.35rem';
   detailsContainer.appendChild(leaveTypeElement);
 
   const startDateElement = document.createElement('p');
   startDateElement.textContent = `Start Date: ${leaveData.start_date}`;
-  startDateElement.style.fontWeight = 'bold';
+  startDateElement.style.fontWeight = '600';
   startDateElement.style.fontSize = '1.35rem';
   detailsContainer.appendChild(startDateElement);
 
   const endDateElement = document.createElement('p');
   endDateElement.textContent = `End Date: ${leaveData.end_date}`;
-  endDateElement.style.fontWeight = 'bold';
+  endDateElement.style.fontWeight = '600';
   endDateElement.style.fontSize = '1.35rem';
   detailsContainer.appendChild(endDateElement);
 
   const reasonElement = document.createElement('p');
   reasonElement.textContent = `Reason: ${leaveData.reason}`;
-  reasonElement.style.fontWeight = 'bold';
+  reasonElement.style.fontWeight = '600';
   reasonElement.style.fontSize = '1.35rem';
   detailsContainer.appendChild(reasonElement);
 
@@ -175,7 +180,7 @@ async function showApplicationInfo(event) {
   approveButton.textContent = 'Approve';
   approveButton.style.padding = '0.5rem 2rem';
   approveButton.style.fontSize = '1.2rem';
-  approveButton.style.fontWeight = '700';
+  approveButton.style.fontWeight = 'bold';
   approveButton.style.backgroundColor = '#007bff';
   approveButton.style.color = 'white';
   approveButton.style.border = 'none';
@@ -186,12 +191,13 @@ async function showApplicationInfo(event) {
   approveButton.addEventListener('mouseout', () => approveButton.style.backgroundColor = '#007bff');
   approveButton.addEventListener('click', async () => {
     try {
-      const response = await fetch('http://localhost/backend/ajax/contract.php', {
+      const response = await fetch('http://localhost/backend/ajax/attendence.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          id: leaveData.id,
           eid: eid,
           action: 'Approve'
         })
@@ -203,7 +209,7 @@ async function showApplicationInfo(event) {
 
       const data = await response.json();
       console.log('Success:', data);
-      alert(`Leave application for employee ${eid} has been approved.`);
+      alert(`Leave application ${leaveData.id} for employee ${eid} has been approved.`);
       leaveInfoCard.remove();
     } catch (error) {
       console.error('Error:', error);
@@ -227,12 +233,13 @@ async function showApplicationInfo(event) {
   rejectButton.addEventListener('mouseout', () => rejectButton.style.backgroundColor = '#007bff');
   rejectButton.addEventListener('click', async () => {
     try {
-      const response = await fetch('http://localhost/backend/ajax/contract.php', {
+      const response = await fetch('http://localhost/backend/ajax/attendence.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          id: leaveData.id,
           eid: eid,
           action: 'Reject'
         })
@@ -244,7 +251,7 @@ async function showApplicationInfo(event) {
 
       const data = await response.json();
       console.log('Success:', data);
-      alert(`Leave application for employee ${eid} has been rejected.`);
+      alert(`Leave application ${leaveData.id} for employee ${eid} has been rejected.`);
       leaveInfoCard.remove();
     } catch (error) {
       console.error('Error:', error);
@@ -258,14 +265,10 @@ async function showApplicationInfo(event) {
 
   document.body.appendChild(leaveInfoCard);
 
-  document.addEventListener('click', function(event) {
-    if (!leaveInfoCard.contains(event.target)) {
-      leaveInfoCard.remove();
-    }
-  });
+  // Removed the event listener that closes the card when clicking outside of it
 }
 
-// Pagination functionality
+// Pagination functionality (unchanged)
 const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
 const currentPageSpan = document.getElementById('currentPage');
