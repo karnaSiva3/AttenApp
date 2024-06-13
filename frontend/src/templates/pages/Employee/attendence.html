@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../../assets/styles/card.css">
     <link rel="stylesheet" href="../../../assets/styles/listtable.css">
     <link rel="stylesheet" href="../../../assets/styles/searchcard.css">
+    <link rel="stylesheet" href="../../../assets/styles/profilebox.css">
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <!-- Remixicon CDN Link -->
@@ -99,7 +100,17 @@
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">
-          <img src="../../../assets/images/UserProfile.jpeg" alt="" />
+          <img src="../../../assets/images/UserProfile.jpeg" alt="" class="profile-pic" />
+          <div class="pop-over">
+            <div class="pop-over-header">
+              <span class="close-btn">&times;</span>
+            </div>
+            <div class="pop-over-content">
+              <p>EID: 123456</p>
+              <p>Name: John Doe</p>
+              <button class="logout-btn">Logout</button>
+            </div>
+          </div>
         </div>
       </nav>
     </section>
@@ -154,6 +165,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
+    <script src="../../../scripts/components/popoverBox.js"></script>
     <script src="../../../scripts/utils/ajax_utils/attendence.js"></script>
     <script src="../../../scripts/utils/ajax_utils/searchStats.js"></script>
   </body>

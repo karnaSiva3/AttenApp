@@ -1,0 +1,55 @@
+
+  .profile-details {
+    position: relative;
+  }
+  
+  .pop-over {
+    display: none;
+    position: absolute;
+    width:15rem;
+    height:10rem;
+    justify-content: start;
+    top: 100%; 
+    right: 0;
+    background-color: #ffffff;
+    border-radius:1rem;
+    box-shadow:0.8rem #007bff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+  }
+  
+  .pop-over-header {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius:1rem;
+    box-shadow:0.8rem #007bff;
+  }
+  
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close-btn:hover,
+  .close-btn:focus {
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .pop-over-content {
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  .logout-btn {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius:1rem;
+    border: none;
+    cursor: pointer;
+  }

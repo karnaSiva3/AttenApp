@@ -118,6 +118,7 @@
   width: calc(100% - 240px);
   left: 240px;
   transition: all 0.5s ease;
+  z-index:9999;
 }
 
 .sidebar.active ~ .home-section {
