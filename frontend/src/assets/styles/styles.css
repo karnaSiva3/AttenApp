@@ -249,6 +249,7 @@ nav .search-box .bx-search {
   border-top:1px solid #ccc;
   border-bottom:1px solid #ccc;
   background: white;
+  margin-top:0.5rem;
 }
 
 .home-content .subnav ul{

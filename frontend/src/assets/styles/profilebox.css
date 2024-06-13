@@ -1,20 +1,17 @@
-
-  .profile-details {
+.profile-details {
     position: relative;
   }
   
   .pop-over {
     display: none;
     position: absolute;
-    width:15rem;
-    height:10rem;
+    width: 12rem;
+    height: 8rem;
     justify-content: start;
-    top: 100%; 
+    top: 100%;
     right: 0;
     background-color: #ffffff;
-    border-radius:1rem;
-    box-shadow:0.8rem #007bff;
-    min-width: 160px;
+    border-radius: 1rem;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 9999;
   }
@@ -22,8 +19,8 @@
   .pop-over-header {
     padding: 10px;
     background-color: #ffffff;
-    border-radius:1rem;
-    box-shadow:0.8rem #007bff;
+    border-radius: 1rem;
+    box-shadow: 0.8rem #007bff;
   }
   
   .close-btn {
@@ -43,13 +40,24 @@
   .pop-over-content {
     padding: 10px;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:fit-content;
+    margin-bottom:10px;
   }
   
   .logout-btn {
-    background-color: red;
+    background-color: rgb(18, 4, 54);
     color: white;
-    padding: 10px 20px;
-    border-radius:1rem;
+    margin-left:25px;
+    padding: 10px 60px;
+    border-radius: 1rem;
     border: none;
     cursor: pointer;
+    align-self: center; 
+  }
+  .logout-btn:hover,
+  .logout-btn:focus{
+    background: rgb(216, 11, 11);
   }
