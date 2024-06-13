@@ -189,7 +189,7 @@ async function showApplicationInfo(event) {
   approveButton.style.transition = 'background-color 0.3s';
   approveButton.addEventListener('mouseover', () => approveButton.style.backgroundColor = '#28a745');
   approveButton.addEventListener('mouseout', () => approveButton.style.backgroundColor = '#007bff');
-  approveButton.addEventListener('click', () => handleLeaveDecision(leaveData.id, leaveData.eid, 'approve'));
+  approveButton.addEventListener('click', () => handleLeaveDecision(leaveData.id, leaveData.eid, 'approve', leaveData.start_date, leaveData.end_date));
 
   // Create Reject button
   const rejectButton = document.createElement('button');
@@ -204,7 +204,7 @@ async function showApplicationInfo(event) {
   rejectButton.style.transition = 'background-color 0.3s';
   rejectButton.addEventListener('mouseover', () => rejectButton.style.backgroundColor = '#dc3545');
   rejectButton.addEventListener('mouseout', () => rejectButton.style.backgroundColor = '#007bff');
-  rejectButton.addEventListener('click', () => handleLeaveDecision(leaveData.id, leaveData.eid, 'reject'));
+  rejectButton.addEventListener('click', () => handleLeaveDecision(leaveData.id, leaveData.eid, 'reject', leaveData.start_date, leaveData.end_date));
   actionButtonsContainer.appendChild(approveButton);
   actionButtonsContainer.appendChild(rejectButton);
   leaveInfoCard.appendChild(actionButtonsContainer);
@@ -218,14 +218,25 @@ async function showApplicationInfo(event) {
   });
 }
 
-function handleLeaveDecision(id, eid, action) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost/backend/ajax/leavedecision.php', true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      console.log(xhr.responseText);
+async function handleLeaveDecision(id, eid, action, startDate, endDate) {
+  try {
+    const response = await fetch('http://localhost/backend/ajax/leavedecision.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, eid, action, startDate, endDate }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Success:', data);
+
+
+    if (data.message) {
       // Remove the row from the table
       const rowToRemove = tableRows.find(row => row.querySelector('td:first-child').textContent === eid);
       if (rowToRemove) {
@@ -235,23 +246,20 @@ function handleLeaveDecision(id, eid, action) {
         updatePagination(totalRows);
         displayPage(currentPage);
       }
+
       // Close the leave info card
       document.querySelector('div[style*="z-index: -1"]').remove();
-      // Optionally, show a success message to the user
-      alert(`Application ${action === 'approve' ? 'approved' : 'rejected'} successfully.`);
-    } else {
-      console.error('Request failed. Status code:', xhr.status);
+
+      // Show a success message to the user
+      alert(`Application ${action.toLowerCase() === 'approve' ? 'approved' : 'rejected'} successfully.`);
+    } else if (data.error) {
+      console.error('Error:', data.error);
       alert('An error occurred while processing your request.');
     }
-  };
-
-  xhr.onerror = function() {
-    console.error('Connection error');
-    alert('A connection error occurred. Please try again.');
-  };
-
-  const params = `id=${id}&eid=${eid}&action=${action}`;
-  xhr.send(params);
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Failed to process the request. Error: ${error.message}`);
+  }
 }
 // Pagination functionality (unchanged)
 const prevPageBtn = document.getElementById('prevPage');
