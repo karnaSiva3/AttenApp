@@ -115,38 +115,39 @@
         </ul>
       </div>
      </section>
-     <section class="page-content"> 
+     <section class="page-content">
       <div id="cardContainer">
         <div class="card" id="listCard">
           <table id="directoryTable">
             <thead>
-                <tr>
-                    <th>EID</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Actions</th>
-                </tr>
+              <tr>
+                <th>EID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Actions</th>
+              </tr>
             </thead>
             <tbody id="tableBody">
               <!-- data from backend -->
               <!-- Card elements will be dynamically created and inserted here -->
             </tbody>
-        </table>
-        <div id="pagination">
-          <button id="prevPage" disabled>Prev</button>
-          <span id="currentPage"></span>
-          <button id="nextPage">Next</button>
+          </table>
+          <div id="pagination">
+            <button id="prevPage" disabled>Prev</button>
+            <span id="currentPage"></span>
+            <button id="nextPage">Next</button>
+          </div>
         </div>
+        <div class="card" id="searchCard">
+          <div id="searchbar">
+            <i class="ri-search-line" id="searchIcon"></i>
+            <input type="text" id="searchInput" placeholder="Search with EID, Name, Department" style="outline-color:#007bff;">
+          </div>
+          <!-- Card elements will be dynamically created and inserted here -->
         </div>
-       <div class="card" id="searchCard">
-        <div id="searchbar">
-          <i class="ri-search-line" id="searchIcon"></i>
-          <input type="text" id="searchInput" pl aceholder="Search with EID,Name,Department" style="outline-color:#007bff;">
-        </div>
-        <!-- Card elements will be dynamically created and inserted here -->
-       </div>
+        <div id="statsCard" class="card"></div>
       </div>
-     </section>
+    </section>
      
     <!-- bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -155,5 +156,6 @@
     <!-- Project -->
     <script src="../../../scripts/script.js"></script>
     <script src="../../../scripts/utils/ajax_utils/attendence.js"></script>
+    <script src="../../../scripts/utils/ajax_utils/searchStats.js"></script>
   </body>
 </html>

@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', function() {
   function fetchAttendanceAndLeaveStats(eid) {
     const statsXhr = new XMLHttpRequest();
     statsXhr.open('GET', `http://localhost/backend/ajax/stats.php?eid=${eid}`, true);
-    console.log(`http://localhost/backend/ajax/stats.php?eid=${eid}`);
+    
     statsXhr.onload = function() {
       if (statsXhr.status >= 200 && statsXhr.status < 400) {
         try {

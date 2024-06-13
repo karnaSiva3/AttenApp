@@ -181,48 +181,22 @@ async function showApplicationInfo(event) {
   approveButton.textContent = 'Approve';
   approveButton.style.padding = '0.5rem 2rem';
   approveButton.style.fontSize = '1.2rem';
-  approveButton.style.fontWeight = 'bold';
+  approveButton.style.fontWeight = '500';
   approveButton.classList.add('btn', 'btn-primary');
   approveButton.style.border = 'none';
   approveButton.style.borderRadius = '5px';
   approveButton.style.cursor = 'pointer';
   approveButton.style.transition = 'background-color 0.3s';
   approveButton.addEventListener('mouseover', () => approveButton.style.backgroundColor = '#28a745');
-  approveButton.addEventListener('mouseout', () => approveButton.style.backgroundColor = '#007bff');  approveButton.addEventListener('click', async () => {
-    try {
-      const response = await fetch('http://localhost/backend/ajax/leavedecision.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: leaveData.id,
-          eid: eid,
-          action: 'Approve'
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Success:', data);
-      alert(data.message);
-      leaveInfoCard.remove();
-    } catch (error) {
-      console.error('Error:', error);
-      alert(`Failed to approve leave for employee ${eid}. Error: ${error.message}`);
-    }
-  });
-
+  approveButton.addEventListener('mouseout', () => approveButton.style.backgroundColor = '#007bff');
+  approveButton.addEventListener('click', () => handleLeaveDecision(leaveData.id, leaveData.eid, 'approve'));
 
   // Create Reject button
   const rejectButton = document.createElement('button');
   rejectButton.textContent = 'Reject';
   rejectButton.style.padding = '0.5rem 2rem';
   rejectButton.style.fontSize = '1.2rem';
-  rejectButton.style.fontWeight = 'bold';
+  rejectButton.style.fontWeight = '500';
   rejectButton.classList.add('btn', 'btn-primary');
   rejectButton.style.border = 'none';
   rejectButton.style.borderRadius = '5px';
@@ -230,33 +204,7 @@ async function showApplicationInfo(event) {
   rejectButton.style.transition = 'background-color 0.3s';
   rejectButton.addEventListener('mouseover', () => rejectButton.style.backgroundColor = '#dc3545');
   rejectButton.addEventListener('mouseout', () => rejectButton.style.backgroundColor = '#007bff');
-  rejectButton.addEventListener('click', async () => {
-    try {
-      const response = await fetch('http://localhost/backend/ajax/leavedecision.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: leaveData.id,
-          eid: eid,
-          action: 'Reject'
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Success:', data);
-      alert(data.message);
-      leaveInfoCard.remove();
-    } catch (error) {
-      console.error('Error:', error);
-      alert(`Failed to reject leave for employee ${eid}. Error: ${error.message}`);
-    }
-  });
+  rejectButton.addEventListener('click', () => handleLeaveDecision(leaveData.id, leaveData.eid, 'reject'));
   actionButtonsContainer.appendChild(approveButton);
   actionButtonsContainer.appendChild(rejectButton);
   leaveInfoCard.appendChild(actionButtonsContainer);
@@ -270,6 +218,41 @@ async function showApplicationInfo(event) {
   });
 }
 
+function handleLeaveDecision(id, eid, action) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost/backend/ajax/leavedecision.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      console.log(xhr.responseText);
+      // Remove the row from the table
+      const rowToRemove = tableRows.find(row => row.querySelector('td:first-child').textContent === eid);
+      if (rowToRemove) {
+        rowToRemove.remove();
+        tableRows = tableRows.filter(row => row !== rowToRemove);
+        totalRows--;
+        updatePagination(totalRows);
+        displayPage(currentPage);
+      }
+      // Close the leave info card
+      document.querySelector('div[style*="z-index: -1"]').remove();
+      // Optionally, show a success message to the user
+      alert(`Application ${action === 'approve' ? 'approved' : 'rejected'} successfully.`);
+    } else {
+      console.error('Request failed. Status code:', xhr.status);
+      alert('An error occurred while processing your request.');
+    }
+  };
+
+  xhr.onerror = function() {
+    console.error('Connection error');
+    alert('A connection error occurred. Please try again.');
+  };
+
+  const params = `id=${id}&eid=${eid}&action=${action}`;
+  xhr.send(params);
+}
 // Pagination functionality (unchanged)
 const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
