@@ -13,7 +13,7 @@ function fetchTableData() {
   xhr.open('GET', 'http://localhost/backend/ajax/attendence.php', true);
   xhr.onload = function() {
     if (xhr.status === 200) {
-      data = JSON.parse(xhr.responseText); 
+      data = JSON.parse(xhr.responseText); // Assign the fetched data to the global data variable
       totalRows = data.length;
       populateTable(data);
       updatePagination(totalRows);
@@ -74,14 +74,15 @@ async function showApplicationInfo(event) {
     return;
   }
 
-  const listCard = document.getElementById('listCard');
+  const cardContainer = document.getElementById('cardContainer');
+  const listCard = cardContainer.querySelector('#listCard');
   const listCardRect = listCard.getBoundingClientRect();
   const listCardTop = listCardRect.top + window.scrollY;
   const listCardLeft = listCardRect.left + window.scrollX;
   const listCardWidth = listCardRect.width;
   const listCardHeight = listCardRect.height;
-
   const leaveInfoCard = document.createElement('div');
+
   leaveInfoCard.style.height = `${listCardHeight}px`;
   leaveInfoCard.style.width = `${listCardWidth}px`;
   leaveInfoCard.style.borderRadius = '10px';
@@ -92,7 +93,7 @@ async function showApplicationInfo(event) {
   leaveInfoCard.style.left = `${listCardLeft}px`;
   leaveInfoCard.style.backgroundColor = 'white';
   leaveInfoCard.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
-  leaveInfoCard.style.zIndex = '999';
+  leaveInfoCard.style.zIndex = '-1';
   leaveInfoCard.style.display = 'flex';
   leaveInfoCard.style.flexDirection = 'column';
 
@@ -105,7 +106,7 @@ async function showApplicationInfo(event) {
   closeButton.style.background = 'none';
   closeButton.style.border = 'none';
   closeButton.style.fontSize = '3rem';
-  closeButton.style.fontWeight = '600';
+  closeButton.style.fontWeight = 'bold';
   closeButton.style.color = 'red';
   closeButton.style.cursor = 'pointer';
   closeButton.addEventListener('click', () => leaveInfoCard.remove());
@@ -127,44 +128,44 @@ async function showApplicationInfo(event) {
 
   const idElement = document.createElement('p');
   idElement.textContent = `Application ID: ${leaveData.id}`;
-  idElement.style.fontWeight = '600';
-  idElement.style.fontSize = '1.35rem';
+  idElement.style.fontWeight = 'bold';
+  idElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(idElement);
 
   const nameElement = document.createElement('p');
   nameElement.textContent = `Name: ${leaveData.Name}`;
-  nameElement.style.fontWeight = '600';
-  nameElement.style.fontSize = '1.35rem';
+  nameElement.style.fontWeight = 'bold';
+  nameElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(nameElement);
 
   const departmentElement = document.createElement('p');
   departmentElement.textContent = `Department: ${leaveData.Department}`;
-  departmentElement.style.fontWeight = '600';
-  departmentElement.style.fontSize = '1.35rem';
+  departmentElement.style.fontWeight = 'bold';
+  departmentElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(departmentElement);
 
   const leaveTypeElement = document.createElement('p');
   leaveTypeElement.textContent = `Leave Type: ${leaveData.leave_type}`;
-  leaveTypeElement.style.fontWeight = '600';
-  leaveTypeElement.style.fontSize = '1.35rem';
+  leaveTypeElement.style.fontWeight = 'bold';
+  leaveTypeElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(leaveTypeElement);
 
   const startDateElement = document.createElement('p');
   startDateElement.textContent = `Start Date: ${leaveData.start_date}`;
-  startDateElement.style.fontWeight = '600';
-  startDateElement.style.fontSize = '1.35rem';
+  startDateElement.style.fontWeight = 'bold';
+  startDateElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(startDateElement);
 
   const endDateElement = document.createElement('p');
   endDateElement.textContent = `End Date: ${leaveData.end_date}`;
-  endDateElement.style.fontWeight = '600';
-  endDateElement.style.fontSize = '1.35rem';
+  endDateElement.style.fontWeight = 'bold';
+  endDateElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(endDateElement);
 
   const reasonElement = document.createElement('p');
   reasonElement.textContent = `Reason: ${leaveData.reason}`;
-  reasonElement.style.fontWeight = '600';
-  reasonElement.style.fontSize = '1.35rem';
+  reasonElement.style.fontWeight = 'bold';
+  reasonElement.style.fontSize = '1.25rem';
   detailsContainer.appendChild(reasonElement);
 
   leaveInfoCard.appendChild(detailsContainer);
@@ -181,17 +182,15 @@ async function showApplicationInfo(event) {
   approveButton.style.padding = '0.5rem 2rem';
   approveButton.style.fontSize = '1.2rem';
   approveButton.style.fontWeight = 'bold';
-  approveButton.style.backgroundColor = '#007bff';
-  approveButton.style.color = 'white';
+  approveButton.classList.add('btn', 'btn-primary');
   approveButton.style.border = 'none';
   approveButton.style.borderRadius = '5px';
   approveButton.style.cursor = 'pointer';
   approveButton.style.transition = 'background-color 0.3s';
   approveButton.addEventListener('mouseover', () => approveButton.style.backgroundColor = '#28a745');
-  approveButton.addEventListener('mouseout', () => approveButton.style.backgroundColor = '#007bff');
-  approveButton.addEventListener('click', async () => {
+  approveButton.addEventListener('mouseout', () => approveButton.style.backgroundColor = '#007bff');  approveButton.addEventListener('click', async () => {
     try {
-      const response = await fetch('http://localhost/backend/ajax/attendence.php', {
+      const response = await fetch('http://localhost/backend/ajax/leavedecision.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -209,7 +208,7 @@ async function showApplicationInfo(event) {
 
       const data = await response.json();
       console.log('Success:', data);
-      alert(`Leave application ${leaveData.id} for employee ${eid} has been approved.`);
+      alert(data.message);
       leaveInfoCard.remove();
     } catch (error) {
       console.error('Error:', error);
@@ -217,14 +216,14 @@ async function showApplicationInfo(event) {
     }
   });
 
+
   // Create Reject button
   const rejectButton = document.createElement('button');
   rejectButton.textContent = 'Reject';
   rejectButton.style.padding = '0.5rem 2rem';
   rejectButton.style.fontSize = '1.2rem';
   rejectButton.style.fontWeight = 'bold';
-  rejectButton.style.backgroundColor = '#007bff';
-  rejectButton.style.color = 'white';
+  rejectButton.classList.add('btn', 'btn-primary');
   rejectButton.style.border = 'none';
   rejectButton.style.borderRadius = '5px';
   rejectButton.style.cursor = 'pointer';
@@ -233,7 +232,7 @@ async function showApplicationInfo(event) {
   rejectButton.addEventListener('mouseout', () => rejectButton.style.backgroundColor = '#007bff');
   rejectButton.addEventListener('click', async () => {
     try {
-      const response = await fetch('http://localhost/backend/ajax/attendence.php', {
+      const response = await fetch('http://localhost/backend/ajax/leavedecision.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -251,21 +250,24 @@ async function showApplicationInfo(event) {
 
       const data = await response.json();
       console.log('Success:', data);
-      alert(`Leave application ${leaveData.id} for employee ${eid} has been rejected.`);
+      alert(data.message);
       leaveInfoCard.remove();
     } catch (error) {
       console.error('Error:', error);
       alert(`Failed to reject leave for employee ${eid}. Error: ${error.message}`);
     }
   });
-
   actionButtonsContainer.appendChild(approveButton);
   actionButtonsContainer.appendChild(rejectButton);
   leaveInfoCard.appendChild(actionButtonsContainer);
 
   document.body.appendChild(leaveInfoCard);
 
-  // Removed the event listener that closes the card when clicking outside of it
+  document.addEventListener('click', function(event) {
+    if (!leaveInfoCard.contains(event.target)) {
+      leaveInfoCard.remove();
+    }
+  });
 }
 
 // Pagination functionality (unchanged)
@@ -308,4 +310,4 @@ prevPageBtn.addEventListener('click', () => {
 
 nextPageBtn.addEventListener('click', () => {
   displayPage(currentPage + 1);
-});
+}); 
