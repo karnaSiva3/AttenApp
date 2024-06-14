@@ -5,7 +5,7 @@
     width:100%;
     box-shadow: 1rem #7eb8f6;
     margin:10px;
-    margin-bottom:2rem;
+    margin-bottom:0.2rem;
     margin-top:0.5rem;
 }
 
@@ -14,9 +14,13 @@
     border-radius:50px;
     width:100%;
     padding:10px;
-    background:#e4e1e1;    
+    background:#e4e1e1; 
+    transition: background 0.3s ease-in-out;   
 }
 
+.page-content #searchCard #searchInput:focus {
+  background: #ffffff; 
+}
 .page-content #searchCard #searchIcon{
   font-size: 30px;
   padding:0 5px 0 10px;

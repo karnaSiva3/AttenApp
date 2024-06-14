@@ -86,7 +86,7 @@ window.addEventListener('DOMContentLoaded', function() {
           // Update the HTML elements with the fetched data
           attendanceStatsElement.textContent = `${response.attendanceStats}/261`;
           const leavesLeft = 12 - response.leaveStats;
-          leaveStatsElement.textContent = `${12 - leavesLeft}/12`;
+          leaveStatsElement.textContent = `${leavesLeft}/12`;
   
           console.log(response);
         } catch (e) {

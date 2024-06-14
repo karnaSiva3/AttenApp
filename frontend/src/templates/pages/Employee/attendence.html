@@ -5,7 +5,6 @@
     <title>ATTENAPP|Dashboard</title>
      <link rel="stylesheet" href="../../../assets/styles/styles.css" />
     <link rel="stylesheet" href="../../../assets/styles/profilebox.css">
-    <link rel="stylesheet" href="../../../assets/styles/profilebox.css">
     <link rel="stylesheet" href="../../../assets/styles/card.css">
     <link rel="stylesheet" href="../../../assets/styles/listtable.css">
     <link rel="stylesheet" href="../../../assets/styles/searchcard.css">
@@ -154,8 +153,13 @@
         <div class="card" id="searchCard">
           <div id="searchbar">
             <i class="ri-search-line" id="searchIcon"></i>
-            <input type="text" id="searchInput" placeholder="Search with EID, Name, Department" style="outline-color:#007bff;"> 
-            <!-- Card elements will be dynamically created and inserted here -->
+            <input type="text" id="searchInput" placeholder="Search with EID, Name, Department" style="outline-color:#007bff;">
+          </div>
+          <div id="searchOptions" >
+            <!-- Search options will be dynamically render here -->
+          </div>
+          <div id="displayResults">
+            <!-- Search results will be dynamically created and inserted here -->
           </div>
         </div>
       </div>
