@@ -106,32 +106,58 @@ function populateCards(data) {
 
     const transferButton = document.createElement('button');
     transferButton.textContent = 'Transfer';
-    transferButton.style.backgroundColor = '#ffc107';
-    transferButton.style.color = '#212529';
+    transferButton.style.backgroundColor = '#312bcc';
+    transferButton.style.color = 'white';
     transferButton.addEventListener('click', showTransferForm);
+    transferButton.addEventListener('mouseover', function() {
+      transferButton.style.backgroundColor = '#ffc107';
+      transferButton.style.color = '#212529';
+    });
+    transferButton.addEventListener('mouseout', function() {
+      transferButton.style.backgroundColor = '#312bcc';
+      transferButton.style.color = 'white';
+    });
     buttonContainer.appendChild(transferButton);
 
     const contractButton = document.createElement('button');
     contractButton.textContent = 'Contract';
-    contractButton.style.backgroundColor = '#28a745';
+    contractButton.style.backgroundColor = '#312bcc';
     contractButton.style.color = 'white';
     contractButton.addEventListener('click', showContractForm);
+    contractButton.addEventListener('mouseover', function() {
+      contractButton.style.backgroundColor = '#28a745';
+      contractButton.style.color = 'white';
+    });
+    contractButton.addEventListener('mouseout', function() {
+      contractButton.style.backgroundColor = '#312bcc';
+      contractButton.style.color = 'white';
+    });
     buttonContainer.appendChild(contractButton);
 
     const offboardingButton = document.createElement('button');
     offboardingButton.textContent = 'Offboard';
-    offboardingButton.style.backgroundColor = '#dc3545';
+    offboardingButton.style.backgroundColor = '#312bcc';
     offboardingButton.style.color = 'white';
     offboardingButton.style.cursor = 'pointer';
-    offboardingButton.addEventListener('click', function() {offboardEmployee({
-      eid: row.eid,
-      name: row.Name,
-      position: row.position,
-      department: row.Department,
-      salary: row.Salary
+    offboardingButton.addEventListener('click', function() {
+      offboardEmployee({
+        eid: row.eid,
+        name: row.Name,
+        position: row.position,
+        department: row.Department,
+        salary: row.Salary
+      });
     });
+    offboardingButton.addEventListener('mouseover', function() {
+      offboardingButton.style.backgroundColor = '#dc3545';
+      offboardingButton.style.color = 'white';
+    });
+    offboardingButton.addEventListener('mouseout', function() {
+      offboardingButton.style.backgroundColor = '#200bcc';
+      offboardingButton.style.color = 'white';
     });
     buttonContainer.appendChild(offboardingButton);
+
 
     newCard.appendChild(buttonContainer);
 
@@ -289,19 +315,19 @@ function showEmployeeInfo(event) {
 }
 function showTransferForm(event) {
   event.stopPropagation();
-
+ 
   const card = event.target.closest('.card');
   const eid = card.querySelector('.details-container p:first-child').textContent.split(':')[1].trim();
   const department = card.querySelector('.details-container p:nth-child(4)').textContent.split(':')[1].trim();
-  
+ 
   // Find the employee data from the fetched data
   const employeeData = data.find(row => row.eid === eid);
   const officeLocation = employeeData ? employeeData.office_location : 'Unknown';
-
+ 
   const cardRect = card.getBoundingClientRect();
   const cardTop = cardRect.top + window.scrollY;
   const cardLeft = cardRect.left + window.scrollX;
-
+ 
   const transferCard = document.createElement('div');
   transferCard.style.height = 'auto';
   transferCard.style.width = '25rem';
@@ -314,7 +340,7 @@ function showTransferForm(event) {
   transferCard.style.backgroundColor = 'white';
   transferCard.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
   transferCard.style.zIndex = '999';
-
+ 
   // Create close button
   const closeButton = document.createElement('button');
   closeButton.textContent = '×';
@@ -329,57 +355,84 @@ function showTransferForm(event) {
   closeButton.style.cursor = 'pointer';
   closeButton.addEventListener('click', () => transferCard.remove());
   transferCard.appendChild(closeButton);
-
+ 
   const eidElement = document.createElement('p');
   eidElement.textContent = `EID: ${eid}`;
   eidElement.style.fontWeight = 'bold';
   transferCard.appendChild(eidElement);
-
+ 
   const form = document.createElement('form');
   form.style.display = 'flex';
   form.style.flexDirection = 'column';
   form.style.gap = '0.25rem';
-
+ 
   const departmentLabel = document.createElement('label');
   departmentLabel.textContent = 'Department:';
   departmentLabel.style.fontWeight = 'bold';
   form.appendChild(departmentLabel);
-
-  const departmentInput = document.createElement('input');
-  departmentInput.type = 'text';
-  departmentInput.value = department;
-  departmentInput.style.padding = '0.5rem';
-  departmentInput.style.borderRadius = '5px';
-  departmentInput.style.border = '1px solid #ccc';
-  form.appendChild(departmentInput);
-
+ 
+  const departmentSelect = document.createElement('select');
+  departmentSelect.style.padding = '0.5rem';
+  departmentSelect.style.borderRadius = '5px';
+  departmentSelect.style.border = '1px solid #ccc';
+  const departmentOptions = [
+    'Software Development',
+    'Retail Business',
+    'DevOps Department',
+    'Management',
+    'HR',
+    'Mechanical Department'
+  ];
+  departmentOptions.forEach(option => {
+    const optionElement = document.createElement('option');
+    optionElement.value = option;
+    optionElement.textContent = option;
+    if (option === department) {
+      optionElement.selected = true;
+    }
+    departmentSelect.appendChild(optionElement);
+  });
+  form.appendChild(departmentSelect);
+ 
   const officeLocationLabel = document.createElement('label');
   officeLocationLabel.textContent = 'Office Location:';
   officeLocationLabel.style.fontWeight = 'bold';
   form.appendChild(officeLocationLabel);
-
-  const officeLocationInput = document.createElement('input');
-  officeLocationInput.type = 'text';
-  officeLocationInput.value = officeLocation;
-  officeLocationInput.style.padding = '0.5rem';
-  officeLocationInput.style.borderRadius = '5px';
-  officeLocationInput.style.border = '1px solid #ccc';
-  form.appendChild(officeLocationInput);
-
+ 
+  const officeLocationSelect = document.createElement('select');
+  officeLocationSelect.style.padding = '0.5rem';
+  officeLocationSelect.style.borderRadius = '5px';
+  officeLocationSelect.style.border = '1px solid #ccc';
+  const officeLocationOptions = [
+    'AZ24, Indrapasth Nagar , New Delhi',
+    'JH_530, Indra Nagar, Banglore',
+    'Atlantic Heights, Varsova, Mumbai'
+  ];
+  officeLocationOptions.forEach(option => {
+    const optionElement = document.createElement('option');
+    optionElement.value = option;
+    optionElement.textContent = option;
+    if (option === officeLocation) {
+      optionElement.selected = true;
+    }
+    officeLocationSelect.appendChild(optionElement);
+  });
+  form.appendChild(officeLocationSelect);
+ 
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
   submitButton.textContent = 'Update';
-  submitButton.style.fontWeight='bolder';
+  submitButton.style.fontWeight = 'bolder';
   submitButton.classList.add('btn', 'btn-primary');
   submitButton.style.marginTop = '1rem';
   form.appendChild(submitButton);
-
+ 
   form.addEventListener('submit', async function(e) {
-    e.preventDefault(); 
-  
-    const newDepartment = departmentInput.value;
-    const newOfficeLocation = officeLocationInput.value;
-  
+    e.preventDefault();
+ 
+    const newDepartment = departmentSelect.value;
+    const newOfficeLocation = officeLocationSelect.value;
+ 
     try {
       const response = await fetch('http://localhost/backend/ajax/transfer.php', {
         method: 'POST',
@@ -392,21 +445,21 @@ function showTransferForm(event) {
           office_location: newOfficeLocation
         })
       });
-  
+ 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+ 
       const data = await response.json();
       console.log('Success:', data);
-  
+ 
       // Update the card with new data
       card.querySelector('.details-container p:nth-child(4)').textContent = `Department: ${newDepartment}`;
       // You might also want to update other parts of the UI here
-  
+ 
       // Show an alert for successful update
       alert(`Employee ${eid} has been successfully transferred to ${newDepartment} department at ${newOfficeLocation} office.`);
-  
+ 
       transferCard.remove(); // Close the transfer form
     } catch (error) {
       console.error('Error:', error);
@@ -414,18 +467,18 @@ function showTransferForm(event) {
       alert(`Failed to transfer employee ${eid}. Error: ${error.message}`);
     }
   });
-
-
+ 
+ 
   transferCard.appendChild(form);
-
+ 
   document.body.appendChild(transferCard);
-
+ 
   document.addEventListener('click', function(event) {
     if (!transferCard.contains(event.target)) {
       transferCard.remove();
     }
   });
-}
+ }
 
 function showContractForm(event) {
   event.stopPropagation();

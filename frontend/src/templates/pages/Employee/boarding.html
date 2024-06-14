@@ -127,80 +127,93 @@
        </div>
      </section>
      
-     <section class="page-content"> 
-        <ul class="navbar">
-          <li class="current"><a href="#">Onboarding</a></li>
-          <li><a href="offboarding.html">Offboarding</a></li>
-        </ul>
-        <h1>Onboarding Form</h1>
-        <form>
-          <div class="employee-details">
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required><br>
-            </div>
-
-            <div class="form-group">
-              <label for="job-title">Job Title:</label>
-              <input type="text" id="job-title" name="job-title" required><br>
-            </div>
-           
-            <div class="form-group">
-              <label for="department">Department:</label>
-              <input type="text" id="department" name="department" required><br>
-            </div>
-           
-            <div class="form-group">
-              <label for="office-location">Office Location:</label>
-              <input type="text" id="office-location" name="office-location" required><br>
-            </div>
-           
-            <div class="form-group">
-              <label for="pan-card">PAN Card Number:</label>
-              <input type="text" id="pan-card" name="panCard" required><br>
-           </div>
-      
-           <div class="form-group">
-              <label for="govt-id">Government ID Number:</label>
-              <input type="text" id="govt-id" name="govtId" required><br>
-           </div>
-            
-            <div class="form-group">
-              <label for="permanent-address">Permanent Address:</label>
-              <textarea id="permanent-address" name="permanent-address" required></textarea><br>
-            </div>
-           
-            <div class="form-group">
-              <label for="residential-address">Residential Address:</label>
-             <textarea id="residential-address" name="residential-address" required></textarea><br>
-            </div>
-
-            <div class="form-group">
-              <label for="phone">Phone:</label>
-              <input type="tel" id="phone" name="phone" required><br>
-           </div>
-      
-           <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required><br>
-           </div>
-           
-            <div class="form-group">
-              <label for="photo">Photo:</label>
-              <input type="file" id="photo" name="photo" required><br>
-            </div> 
-
-            <div class="form-group">
-              <label for="salary">Salary:</label>
-              <input type="text" id="salary" name="salary" required><br>
-           </div>
-            <input type="hidden" name="Hire-Date" id="hire-date">
-         </div>
-         <button type="submit" id="submitBtn" class="button">
-           Register
-         </button>
+     <section class="page-content" style="margin-top:0.5rem;">
+      <ul class="navbar" style="margin-top:0.5rem;" >
+        <li class="current" style="margin-top:0.5rem;"><a href="#">Onboarding</a></li>
+        <li style="margin-top:0.5rem;"><a href="offboarding.html">Offboarding</a></li>
+      </ul>
+      <h1>Onboarding Form</h1>
+      <form>
+        <div class="employee-details">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" name="job-title" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="department">Department:</label>
+            <select id="department" name="department" required>
+              <option value="">Select Department</option>
+              <option value="Software Development">Software Development</option>
+              <option value="Retail Business">Retail Business</option>
+              <option value="DevOps Department">DevOps Department</option>
+              <option value="Management">Management</option>
+              <option value="HR">HR</option>
+              <option value="Mechanical Department">Mechanical Department</option>
+            </select><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="office-location">Office Location:</label>
+            <select id="office-location" name="office-location" required>
+              <option value="">Select Office Location</option>
+              <option value="AZ24, Indrapasth Nagar , New Delhi">AZ24, Indrapasth Nagar , New Delhi</option>
+              <option value="JH_530, Indra Nagar, Banglore">JH_530, Indra Nagar, Banglore</option>
+              <option value="Atlantic Heights, Varsova, Mumbai">Atlantic Heights, Varsova, Mumbai</option>
+            </select><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="pan-card">PAN Card Number:</label>
+            <input type="text" id="pan-card" name="panCard" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="govt-id">Government ID Number:</label>
+            <input type="text" id="govt-id" name="govtId" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="permanent-address">Permanent Address:</label>
+            <textarea id="permanent-address" name="permanent-address" required></textarea><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="residential-address">Residential Address:</label>
+            <textarea id="residential-address" name="residential-address" required></textarea><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo" required><br>
+          </div>
+    
+          <div class="form-group">
+            <label for="salary">Salary:</label>
+            <input type="text" id="salary" name="salary" required><br>
+          </div>
+          <input type="hidden" name="Hire-Date" id="hire-date">
+        </div>
+        <button type="submit" id="submitBtn" class="button">
+          Register
+        </button>
       </form>
-     </section>
+    </section>
      
     <!-- bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
