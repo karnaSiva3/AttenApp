@@ -1,5 +1,5 @@
 let tableRows = [];
-const itemsPerPage = 7;
+const itemsPerPage = 6;
 let currentPage = 1;
 let totalRows = 0;
 let data = [];
@@ -87,7 +87,7 @@ async function showApplicationInfo(event) {
   leaveInfoCard.style.width = `${listCardWidth}px`;
   leaveInfoCard.style.borderRadius = '10px';
   leaveInfoCard.style.background = '#e4e1e1';
-  leaveInfoCard.style.padding = '2rem';
+  leaveInfoCard.style.padding = '1rem';
   leaveInfoCard.style.position = 'absolute';
   leaveInfoCard.style.top = `${listCardTop}px`;
   leaveInfoCard.style.left = `${listCardLeft}px`;
@@ -115,16 +115,16 @@ async function showApplicationInfo(event) {
   const titleElement = document.createElement('h3');
   titleElement.textContent = 'Application Information';
   titleElement.style.marginTop = '0';
-  titleElement.style.fontSize = '2.2rem';
+  titleElement.style.fontSize = '2rem';
   titleElement.style.fontWeight = 'bold';
   titleElement.style.color = '#007bff';
-  titleElement.style.marginBottom = '2.5rem';
+  titleElement.style.marginBottom = '2rem';
   leaveInfoCard.appendChild(titleElement);
 
   const detailsContainer = document.createElement('div');
   detailsContainer.style.display = 'flex';
   detailsContainer.style.flexDirection = 'column';
-  detailsContainer.style.gap = '1.75rem';
+  detailsContainer.style.gap = '1rem';
 
   const idElement = document.createElement('p');
   idElement.textContent = `Application ID: ${leaveData.id}`;
@@ -211,11 +211,11 @@ async function showApplicationInfo(event) {
 
   document.body.appendChild(leaveInfoCard);
 
-  document.addEventListener('click', function(event) {
-    if (!leaveInfoCard.contains(event.target)) {
-      leaveInfoCard.remove();
-    }
-  });
+  // document.addEventListener('click', function(event) {
+  //   if (!leaveInfoCard.contains(event.target)) {
+  //     leaveInfoCard.remove();
+  //   }
+  // });
 }
 
 async function handleLeaveDecision(id, eid, action, startDate, endDate) {
