@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // Add event listener to clockInBtn
   clockInBtn.addEventListener('click', function() {
-    const eid = 27; // Change EID value from here to see the change in value in the table
+    const eid = 11; // Change EID value from here to see the change in value in the table
     let newStatus;
     let clockInTime;
     let clockOutTime;

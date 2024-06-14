@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>ATTENAPP|Employee</title>
-    <link rel="stylesheet" href="../../../assets/styles/styles.css" />
+     <link rel="stylesheet" href="../../../assets/styles/styles.css" />
+    <link rel="stylesheet" href="../../../assets/styles/profilebox.css">
     <link rel="stylesheet" href="../../../assets/styles/empcard.css">
     <!-- jquery cdn link -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
@@ -52,7 +53,17 @@
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">
-          <img src="../../../assets/images/UserProfile.jpeg" alt="" />
+          <img src="../../../assets/images/UserProfile.jpeg" alt="" class="profile-pic" />
+          <div class="pop-over">
+            <div class="pop-over-header">
+              <span class="close-btn">&times;</span>
+            </div>
+            <div class="pop-over-content">
+              <p>EID:11</p>
+              <p>Name:Raj Mankar</p>
+              <button class="logout-btn">Logout</button>
+            </div>
+          </div>
         </div>
       </nav>
      </section>
@@ -91,7 +102,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <!-- Project -->
-    <script src="../../../scripts/script.js"></script>
+       <script src="../../../scripts/script.js"></script>
+    <script src="../../../scripts/components/popoverBox.js"></script>
     <script src="../../../scripts/components/clock_in.js"></script>
     <script src="../../../scripts/utils/ajax_utils/status.js">  
     </script>
