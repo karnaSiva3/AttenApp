@@ -1,0 +1,56 @@
+#cardContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .card {
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #offerform h2 {
+    margin-top: 0;
+    font-size:2rem;
+    font-weight: bold;
+  }
+  
+  #offerform form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  #offerform label {
+    margin-top: 0.5rem;
+    font-weight: bold;
+  }
+  
+  #offerform input,
+  #offerform textarea,
+  #offerform button {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  #offerform textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  #offerform button {
+    margin-top: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #offerform button:hover {
+    background-color: #00438a;
+  }
